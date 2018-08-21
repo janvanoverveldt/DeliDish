@@ -1,4 +1,6 @@
-package be.kdg.deliDish.domain;
+package be.kdg.deliDish.domain.order;
+
+import be.kdg.deliDish.domain.restaurant.Dish;
 
 public class OrderLine {
     private Dish dish;

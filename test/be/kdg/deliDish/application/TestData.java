@@ -1,6 +1,11 @@
 package be.kdg.deliDish.application;
 
-import be.kdg.deliDish.domain.*;
+import be.kdg.deliDish.domain.order.Order;
+import be.kdg.deliDish.domain.order.OrderLine;
+import be.kdg.deliDish.domain.restaurant.Allergen;
+import be.kdg.deliDish.domain.restaurant.Dish;
+import be.kdg.deliDish.domain.restaurant.Restaurant;
+import be.kdg.deliDish.domain.restaurant.RestaurantOpening;
 import be.kdg.foundation.contact.Adress;
 import be.kdg.foundation.contact.Gemeente;
 import be.kdg.foundation.contact.Position;
@@ -39,7 +44,7 @@ class TestData {
         r1.addDish(dishes.get(0));
     }
 
-    protected List<Order> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 

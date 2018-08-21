@@ -1,4 +1,4 @@
-package be.kdg.deliDish.domain;
+package be.kdg.deliDish.domain.restaurant;
 
 import java.util.List;
 

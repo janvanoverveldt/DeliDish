@@ -1,6 +1,6 @@
 package be.kdg.infra;
 
-import be.kdg.hiFresh.domain.recept.WeekAanbod;
+import be.kdg.deliDish.domain.recept.WeekAanbod;
 
 import java.util.Collection;
 

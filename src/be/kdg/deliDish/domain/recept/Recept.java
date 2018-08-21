@@ -1,8 +1,8 @@
-package be.kdg.hiFresh.domain.recept;
+package be.kdg.deliDish.domain.recept;
 
 
-import be.kdg.hiFresh.domain.business.ContractCatalog;
-import be.kdg.hiFresh.domain.leverancier.Contract;
+import be.kdg.deliDish.domain.business.ContractCatalog;
+import be.kdg.deliDish.domain.leverancier.Contract;
 
 import java.time.Duration;
 import java.util.List;

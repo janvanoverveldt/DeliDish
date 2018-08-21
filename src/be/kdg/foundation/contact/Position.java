@@ -1,10 +1,10 @@
 package be.kdg.foundation.contact;
 
 public class Position {
-    private final float longitude;
-    private final float lattitude;
+    private final double longitude;
+    private final double lattitude;
 
-    public Position(float longitude, float lattitude) {
+    public Position(double longitude, double lattitude) {
         this.longitude = longitude;
         this.lattitude = lattitude;
     }

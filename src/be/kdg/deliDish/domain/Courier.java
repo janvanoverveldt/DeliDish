@@ -1,4 +1,4 @@
-package be.kdg.hiFresh.domain;
+package be.kdg.deliDish.domain;
 
 import be.kdg.foundation.contact.Adres;
 import be.kdg.foundation.contact.ContactInfo;

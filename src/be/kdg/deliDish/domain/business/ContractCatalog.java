@@ -1,6 +1,6 @@
-package be.kdg.hiFresh.domain.business;
+package be.kdg.deliDish.domain.business;
 
-import be.kdg.hiFresh.domain.leverancier.Contract;
+import be.kdg.deliDish.domain.leverancier.Contract;
 import be.kdg.infra.ContractMemoryRepository;
 
 import java.util.Collection;

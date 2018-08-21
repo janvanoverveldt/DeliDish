@@ -1,4 +1,4 @@
-package be.kdg.hiFresh.domain.recept;
+package be.kdg.deliDish.domain.recept;
 
 import be.kdg.foundation.qualified.Hoeveelheid;
 
@@ -8,7 +8,7 @@ import java.util.logging.Logger;
  * @author Jan de Rijke.
  */
 public class Ingredient {
-    private static Logger logger = Logger.getLogger("be.kdg.hiFresh.domain.recept.Ingredient");
+    private static Logger logger = Logger.getLogger("be.kdg.deliDish.domain.recept.Ingredient");
     private Hoeveelheid persoonsHoeveelheid;
     private Product product;
 

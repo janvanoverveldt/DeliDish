@@ -1,4 +1,4 @@
-package be.kdg.hiFresh.domain.recept;
+package be.kdg.deliDish.domain.recept;
 
 /**
  * @author Jan de Rijke.

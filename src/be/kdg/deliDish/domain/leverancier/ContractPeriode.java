@@ -1,7 +1,7 @@
-package be.kdg.hiFresh.domain.leverancier;
+package be.kdg.deliDish.domain.leverancier;
 
+import be.kdg.deliDish.domain.recept.Product;
 import be.kdg.foundation.qualified.Hoeveelheid;
-import be.kdg.hiFresh.domain.recept.Product;
 
 import java.time.LocalDate;
 import java.util.logging.Logger;
@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  */
 public class ContractPeriode {
     private static Logger logger = Logger.getLogger(
-            "be.kdg.hiFresh.domain.leverancier.ContractPeriode");
+            "be.kdg.deliDish.domain.leverancier.ContractPeriode");
     private double prijs;
     private LocalDate van; //inclusive
     private LocalDate tot; //inclusive

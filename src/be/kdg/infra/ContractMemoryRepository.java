@@ -1,7 +1,7 @@
 package be.kdg.infra;
 
 
-import be.kdg.hiFresh.domain.leverancier.Contract;
+import be.kdg.deliDish.domain.leverancier.Contract;
 
 public class ContractMemoryRepository<V> extends MemoryRepository<Contract> {
 

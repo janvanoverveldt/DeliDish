@@ -1,4 +1,4 @@
-package be.kdg.hiFresh.domain.recept;
+package be.kdg.deliDish.domain.recept;
 
 import org.threeten.extra.YearWeek;
 

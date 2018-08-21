@@ -1,14 +1,14 @@
-package be.kdg.hiFresh.application;
+package be.kdg.deliDish.application;
 
 
+import be.kdg.deliDish.domain.business.ContractCatalog;
+import be.kdg.deliDish.domain.business.ReceptCatalog;
+import be.kdg.deliDish.domain.business.WeekAanbodCatalog;
+import be.kdg.deliDish.domain.leverancier.Contract;
+import be.kdg.deliDish.domain.recept.Recept;
+import be.kdg.deliDish.domain.recept.WeekAanbod;
 import be.kdg.foundation.operatie.Operatie;
 import be.kdg.foundation.operatie.Sort;
-import be.kdg.hiFresh.domain.business.ContractCatalog;
-import be.kdg.hiFresh.domain.business.ReceptCatalog;
-import be.kdg.hiFresh.domain.business.WeekAanbodCatalog;
-import be.kdg.hiFresh.domain.leverancier.Contract;
-import be.kdg.hiFresh.domain.recept.Recept;
-import be.kdg.hiFresh.domain.recept.WeekAanbod;
 
 import java.util.List;
 import java.util.Map;

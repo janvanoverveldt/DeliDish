@@ -1,4 +1,4 @@
-package be.kdg.hiFresh.domain.leverancier;
+package be.kdg.deliDish.domain.leverancier;
 
 import java.time.LocalDate;
 import java.util.logging.Logger;
@@ -7,7 +7,7 @@ import java.util.logging.Logger;
  * @author Jan de Rijke.
  */
 public class Contract {
-    private static Logger logger = Logger.getLogger("be.kdg.hiFresh.domain.leverancier.Contract");
+    private static Logger logger = Logger.getLogger("be.kdg.deliDish.domain.leverancier.Contract");
     private final LocalDate datum;
     private final int contractNummer;
     private final Leverancier leverancier;

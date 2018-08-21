@@ -1,4 +1,4 @@
-package be.kdg.hiFresh.domain;
+package be.kdg.deliDish.domain;
 
 import be.kdg.foundation.contact.Adres;
 
@@ -10,4 +10,9 @@ public class Order {
     private Adres deliveryAdress;
     private String deliveryInstructions;
 
+    public Order(List<OrderLine> orderlines, Adres deliveryAdress, String deliveryInstructions) {
+        this.orderlines = orderlines;
+        this.deliveryAdress = deliveryAdress;
+        this.deliveryInstructions = deliveryInstructions;
+    }
 }

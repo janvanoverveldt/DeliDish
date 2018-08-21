@@ -1,4 +1,4 @@
-package be.kdg.hiFresh.domain;
+package be.kdg.deliDish.domain;
 
 import java.time.LocalDateTime;
 

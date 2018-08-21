@@ -1,8 +1,8 @@
-package be.kdg.hiFresh.domain.business;
+package be.kdg.deliDish.domain.business;
 
+import be.kdg.deliDish.domain.recept.Recept;
 import be.kdg.foundation.operatie.Operatie;
 import be.kdg.foundation.operatie.Sort;
-import be.kdg.hiFresh.domain.recept.Recept;
 import be.kdg.infra.MemoryRepository;
 import be.kdg.infra.ReceptMemoryRepository;
 

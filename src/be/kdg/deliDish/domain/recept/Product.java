@@ -1,4 +1,4 @@
-package be.kdg.hiFresh.domain.recept;
+package be.kdg.deliDish.domain.recept;
 
 
 import be.kdg.foundation.qualified.Hoeveelheid;

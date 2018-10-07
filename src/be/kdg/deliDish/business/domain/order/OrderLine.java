@@ -1,6 +1,6 @@
-package be.kdg.deliDish.domain.order;
+package be.kdg.deliDish.business.domain.order;
 
-import be.kdg.deliDish.domain.restaurant.Dish;
+import be.kdg.deliDish.business.domain.restaurant.Dish;
 
 public class OrderLine {
     private Dish dish;
@@ -11,5 +11,9 @@ public class OrderLine {
         this.dish = dish;
         this.quantity = quantity;
         this.remark = remark;
+    }
+
+    public Dish getDish() {
+        return dish;
     }
 }

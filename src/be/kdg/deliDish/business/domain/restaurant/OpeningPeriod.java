@@ -1,15 +1,15 @@
-package be.kdg.deliDish.domain.restaurant;
+package be.kdg.deliDish.business.domain.restaurant;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 
-public class RestaurantOpening {
+public class OpeningPeriod {
     private DayOfWeek weekday;
     private LocalTime opening;
     private LocalTime closing;
 
-    public RestaurantOpening(DayOfWeek weekday, LocalTime opening, LocalTime closing) {
+    public OpeningPeriod(DayOfWeek weekday, LocalTime opening, LocalTime closing) {
         this.weekday = weekday;
         this.opening = opening;
         this.closing = closing;

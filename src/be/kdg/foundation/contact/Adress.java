@@ -17,6 +17,9 @@ public class Adress {
         this.nummer = nr;
         this.gemeente = gemeente;
         this.position = position;
+    }
 
+    public Position getPosition() {
+        return position;
     }
 }

@@ -5,11 +5,11 @@ package be.kdg.foundation.contact;
  */
 public class ContactInfo {
     // TODO0: implementeer klasse
-    private Adres adres;
+    private Adress adres;
     private String email;
-    private String[] tel;
+    private String tel;
 
-    public ContactInfo(Adres adres, String email, String... tel) {
+    public ContactInfo(Adress adres, String email, String tel) {
         this.adres = adres;
         this.email = email;
         this.tel = tel;

@@ -8,4 +8,12 @@ public class Position {
         this.longitude = longitude;
         this.lattitude = lattitude;
     }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public double getLattitude() {
+        return lattitude;
+    }
 }

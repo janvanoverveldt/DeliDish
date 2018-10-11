@@ -1,7 +1,5 @@
 package be.kdg.deliDish.application;
 
-import be.kdg.deliDish.business.domain.courier.Courier;
-import be.kdg.deliDish.business.domain.customer.Customer;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.order.OrderEvent;
 import be.kdg.deliDish.business.domain.order.OrderLine;
@@ -10,10 +8,14 @@ import be.kdg.deliDish.business.domain.restaurant.Allergen;
 import be.kdg.deliDish.business.domain.restaurant.Dish;
 import be.kdg.deliDish.business.domain.restaurant.OpeningPeriod;
 import be.kdg.deliDish.business.domain.restaurant.Restaurant;
+import be.kdg.deliDish.business.domain.user.Courier;
+import be.kdg.deliDish.business.domain.user.Customer;
+import be.kdg.deliDish.business.domain.user.Partner;
 import be.kdg.foundation.contact.Adress;
 import be.kdg.foundation.contact.ContactInfo;
 import be.kdg.foundation.contact.Gemeente;
 import be.kdg.foundation.contact.Position;
+import be.kdg.foundation.financial.RekeningNummer;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -69,7 +71,7 @@ class TestData {
     }
     private void makeRestaurants() {
 
-        Restaurant r1 = new Restaurant("Didier's Place", new Adress("Tolstraat", "30", new Gemeente("2000", "Antwerpen"), new Position(51.210150, 4.397607)));
+        Restaurant r1 = new Restaurant("Didier's Place", new Adress("Tolstraat", "30", new Gemeente("2000", "Antwerpen"), new Position(51.210150, 4.397607)), new Partner(new RekeningNummer("BE58658963247896")));
         OpeningPeriod ro = new OpeningPeriod(DayOfWeek.FRIDAY, LocalTime.of(11, 30), LocalTime.of(23, 30));
         r1.addOpening(ro);
         List<Dish> dishes = new ArrayList<>();
@@ -80,8 +82,8 @@ class TestData {
     }
 
     private void makeCouriers() {
-        Courier courierThatInteracts = new Courier("Frits", "Den Dichterbij", new ContactInfo(new Adress("Volkstraat", "10", gemeentes.get(1), new Position(51.211759, 4.396674)), "frits@kdg.be", "032545856"), new Position(51.219090, 4.399394));
-        Courier courierFar1 = new Courier("Frats", "Van Verre", new ContactInfo(new Adress("Nationalestraat", "10", gemeentes.get(1), new Position(51.211759, 4.396674)), "frats@kdg.be", "05652456"), new Position(51.220717, 4.471559));
+        Courier courierThatInteracts = new Courier("Frits", "Den Dichterbij", new ContactInfo(new Adress("Volkstraat", "10", gemeentes.get(1), new Position(51.211759, 4.396674)), "frits@kdg.be", "032545856"), new Position(51.219090, 4.399394), new Partner(new RekeningNummer("BE11111111111111111")));
+        Courier courierFar1 = new Courier("Frats", "Van Verre", new ContactInfo(new Adress("Nationalestraat", "10", gemeentes.get(1), new Position(51.211759, 4.396674)), "frats@kdg.be", "05652456"), new Position(51.220717, 4.471559), new Partner(new RekeningNummer("BE22222222222222")));
         couriers.add(courierThatInteracts);
         couriers.add(courierFar1);
         //TODO: Add unavailable couriers

@@ -1,6 +1,7 @@
 package be.kdg.deliDish.business.domain.restaurant;
 
 
+import be.kdg.deliDish.business.domain.user.Partner;
 import be.kdg.foundation.contact.Adress;
 import be.kdg.foundation.contact.Position;
 
@@ -12,11 +13,12 @@ public class Restaurant {
     private Adress adres;
     private List<OpeningPeriod> openingShedule = new ArrayList<>();
     private List<Dish> dishes = new ArrayList<>();
+    private Partner partner;
 
-    public Restaurant(String name, Adress adres) {
+    public Restaurant(String name, Adress adres, Partner partner) {
         this.name = name;
         this.adres = adres;
-
+        this.partner = partner;
     }
 
     public void addOpening(OpeningPeriod opening) {

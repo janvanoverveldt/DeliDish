@@ -1,6 +1,6 @@
 package be.kdg.deliDish.business.domain.order;
 
-import be.kdg.deliDish.business.domain.customer.Customer;
+import be.kdg.deliDish.business.domain.user.Customer;
 import be.kdg.foundation.contact.Adress;
 
 import java.time.LocalDateTime;

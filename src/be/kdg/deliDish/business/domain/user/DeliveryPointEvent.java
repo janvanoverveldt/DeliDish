@@ -1,4 +1,4 @@
-package be.kdg.deliDish.business.domain.courier;
+package be.kdg.deliDish.business.domain.user;
 
 import java.time.LocalDateTime;
 

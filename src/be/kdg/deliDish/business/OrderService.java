@@ -14,6 +14,7 @@ import java.util.Optional;
 public class OrderService {
     private final MemoryRepository<Order> orderRepo = new MemoryRepository<>();
     private RestoService rc;
+    private static int orerIdSequence = 0;
 
     public void addOrder(Order order) {
         orderRepo.put(order);
@@ -58,5 +59,12 @@ public class OrderService {
         return -1;
     }
 
+    public static int generateOrderId() {
+        return orerIdSequence++;
+    }
 
+
+    public Order getOrder(int deliveryNr) {
+        return (Order) orderRepo.findWhere(o -> o.getOrderID() == deliveryNr);
+    }
 }

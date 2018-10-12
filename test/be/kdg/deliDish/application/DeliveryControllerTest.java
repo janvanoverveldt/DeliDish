@@ -51,6 +51,7 @@ public class DeliveryControllerTest {
 
     @Test
     void getAvailableDeliveries() {
+        //Er zijn verschillende types van beschikbare orders. Elk zijn ze om de één of andere reden niet beschikbaar, met uitzondering van 1. Zie testdata voor meer detail
         Collection<Order> availableDeliveries = ctrl.getAvailableDeliveries(ads);
         assertEquals(1, availableDeliveries.size(), "Slechts één order voldoet aan de voorwaarden");
         assertEquals(ctrl.getOrderService().getOrders().stream().findFirst().get(), availableDeliveries.stream().findFirst().get());
@@ -59,6 +60,7 @@ public class DeliveryControllerTest {
 
     @Test
     void selectDelivery() {
+
     }
 
     @Test

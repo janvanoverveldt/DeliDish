@@ -50,8 +50,6 @@ public class DeliveryController {
 
     public RestoService getRestoCatalog() {
         return restoService;
-
-
     }
 
     public void addOrder(Order o) {
@@ -64,6 +62,7 @@ public class DeliveryController {
     }
 
     public void selectDelivery(int deliveryNr) {
+
         //TODO: Complete use case deliver order event deliverySelection
         // Makes a new orderEvent and sets user unavailable
     }

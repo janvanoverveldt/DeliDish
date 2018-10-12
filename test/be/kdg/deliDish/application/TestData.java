@@ -1,5 +1,6 @@
 package be.kdg.deliDish.application;
 
+import be.kdg.deliDish.business.OrderService;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.order.OrderEvent;
 import be.kdg.deliDish.business.domain.order.OrderLine;
@@ -79,6 +80,8 @@ class TestData {
         allergens.add(Allergen.Eggs);
         new Dish("Ravioli Summervides", "Ravioli met rucola & Parmezaan, witte asperges, eigeelcrème, jus van Parmezaan (Vegetarisch)", 17.5, allergens, 30, 20, r1);
         restos.add(r1);
+        //TODO: Add resto at one site of city. The resto must have dishes within reach of the main courier and the couriers at that site of the city
+        //TODO: Add resto at other site of city.IThe resto must have dishes within reach of the main courier and the couriers at that site of the city
     }
 
     private void makeCouriers() {
@@ -86,8 +89,9 @@ class TestData {
         Courier courierFar1 = new Courier("Frats", "Van Verre", new ContactInfo(new Adress("Nationalestraat", "10", gemeentes.get(1), new Position(51.211759, 4.396674)), "frats@kdg.be", "05652456"), new Position(51.220717, 4.471559), new Partner(new RekeningNummer("BE22222222222222")));
         couriers.add(courierThatInteracts);
         couriers.add(courierFar1);
-        //TODO: Add unavailable couriers
-        //TODO: The couriers must have DeliveryPoints.
+        //TODO: Add unavailable courier
+        //TODO: Add couriers around resto at one site of city . +50% have more points than mainCourier
+        //TODO: Add couriers around resto at one other of city. -50% have more points than mainCourier
         //TODO: One of the orders must be not visible because of he has less than average points than the other available couriers.
 
     }
@@ -105,13 +109,19 @@ class TestData {
      * Maakt verschillende orders aan
      */
     private void maakOrders() {
+        // Order die altijd beschikbaar moet zijn. De courier is dichtbij en er zijn geen
         OrderLine ol = new OrderLine(restos.get(0).getDish(0), 4, "No remark");
         List<OrderLine> ols = new ArrayList<>();
         ols.add(ol);
         OrderEvent event = new OrderEvent(LocalDateTime.now().minus(3, ChronoUnit.MINUTES), OrderState.ORDER_PLACED, "");
-        Order o = new Order(ols, customer.getDeliveryAdresses().get(0), "Op de bovenste bel drukken (hard doordrukken)", customer);
+        Order o = new Order(ols, customer.getDeliveryAdresses().get(0), "Op de bovenste bel drukken (hard doordrukken)", customer, OrderService.generateOrderId());
         o.addEvent(event);
         orders.add(o);
+        // TODO: Order die niet beschikbaar is omdat de Courier te ver verwijderd is.
+
+        // TODO: Order die niet beschikbaar is omdat de order < 5 min geplaatst is en meer dan 50% van de couriers die in de buurt is hebben een hogere delivery score.
+
+        // TODO: Order die wel beschikbaar is omdat de order < 5 min geplaatst is en minder dan 50% van de couriers die in de buurt is hebben een hogere delivery score.
     }
 
     public List<Order> getOrders() {

@@ -1,11 +1,14 @@
 package be.kdg.deliDish.application;
 
 
-import be.kdg.deliDish.business.*;
-import be.kdg.deliDish.business.domain.courier.Courier;
-import be.kdg.deliDish.business.domain.customer.Customer;
+import be.kdg.deliDish.business.AvailableDeliveriesService;
+import be.kdg.deliDish.business.OrderService;
+import be.kdg.deliDish.business.RestoService;
+import be.kdg.deliDish.business.UserService;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.restaurant.Restaurant;
+import be.kdg.deliDish.business.domain.user.Courier;
+import be.kdg.deliDish.business.domain.user.Customer;
 
 import java.util.Collection;
 
@@ -17,29 +20,40 @@ public class DeliveryController {
     //Session Info
     private Courier appUser;
     // Orchestration classes
-    private OrderCatalog orderCatalog;
-    private CourierCatalog courierCatalog;
-    private RestoCatalog restoCatalog;
-    private CustomerCatalog customerCatalog;
+    private OrderService orderService;
+    private RestoService restoService;
+    private UserService userService;
 
 
     public DeliveryController() {
-        orderCatalog = new OrderCatalog();
-        courierCatalog = new CourierCatalog();
-        restoCatalog = new RestoCatalog();
-        customerCatalog = new CustomerCatalog();
+        orderService = new OrderService();
+        restoService = new RestoService();
+        userService = new UserService();
     }
 
-    public OrderCatalog getOrderCatalog() {
-        return orderCatalog;
+    /**
+     * Sets the sessionUser
+     *
+     * @param appUser
+     */
+    public void setAppUser(Courier appUser) {
+        this.appUser = appUser;
     }
 
-    public CourierCatalog getCourierCatalog() {
-        return courierCatalog;
+    public OrderService getOrderService() {
+        return orderService;
+    }
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public RestoService getRestoCatalog() {
+        return restoService;
     }
 
     public void addOrder(Order o) {
-        orderCatalog.addOrder(o);
+        orderService.addOrder(o);
     }
 
     public Collection<Order> getAvailableDeliveries(AvailableDeliveriesService ads) {
@@ -48,8 +62,9 @@ public class DeliveryController {
     }
 
     public void selectDelivery(int deliveryNr) {
+
         //TODO: Complete use case deliver order event deliverySelection
-        // Makes a new orderEvent and sets courier unavailable
+        // Makes a new orderEvent and sets user unavailable
     }
 
     public void registerDeliveryPickup(int deliveryNr) {
@@ -67,22 +82,15 @@ public class DeliveryController {
     }
 
     public void addCourier(Courier courier) {
-        courierCatalog.addCourier(courier);
+        userService.addCourier(courier);
     }
 
     public void addCustomer(Customer customer) {
-        customerCatalog.addCustomer(customer);
+        userService.addCustomer(customer);
     }
 
     public void addResto(Restaurant restaurant) {
-        restoCatalog.addResto(restaurant);
+        restoService.addResto(restaurant);
     }
 
-    public RestoCatalog getRestoCatalog() {
-        return restoCatalog;
-    }
-
-    public void setAppUser(Courier appUser) {
-        this.appUser = appUser;
-    }
 }

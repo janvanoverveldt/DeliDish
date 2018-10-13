@@ -11,15 +11,16 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Optional;
 
-public class OrderCatalog {
+public class OrderService {
     private final MemoryRepository<Order> orderRepo = new MemoryRepository<>();
-    private RestoCatalog rc;
+    private RestoService rc;
+    private static int orerIdSequence = 0;
 
     public void addOrder(Order order) {
         orderRepo.put(order);
     }
 
-    public void setRc(RestoCatalog rc) {
+    public void setRc(RestoService rc) {
         this.rc = rc;
     }
 
@@ -58,5 +59,12 @@ public class OrderCatalog {
         return -1;
     }
 
+    public static int generateOrderId() {
+        return orerIdSequence++;
+    }
 
+
+    public Order getOrder(int deliveryNr) {
+        return (Order) orderRepo.findWhere(o -> o.getOrderID() == deliveryNr);
+    }
 }

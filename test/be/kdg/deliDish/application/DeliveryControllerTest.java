@@ -2,9 +2,9 @@ package be.kdg.deliDish.application;
 
 import be.kdg.deliDish.business.AvailableDeliveriesService;
 import be.kdg.deliDish.business.BelgianAvailableDeliveriesService;
-import be.kdg.deliDish.business.domain.courier.Courier;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.restaurant.Restaurant;
+import be.kdg.deliDish.business.domain.user.Courier;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +28,7 @@ public class DeliveryControllerTest {
 
         ctrl = new DeliveryController();
         ctrl.setAppUser(data.getCouriers().get(0));
-        ads = new BelgianAvailableDeliveriesService(ctrl.getCourierCatalog(), ctrl.getOrderCatalog(), ctrl.getRestoCatalog());
+        ads = new BelgianAvailableDeliveriesService(ctrl.getUserService(), ctrl.getOrderService(), ctrl.getRestoCatalog());
 
         //Load testdata into repositories
         for (Courier courier : data.getCouriers()) {
@@ -51,14 +51,16 @@ public class DeliveryControllerTest {
 
     @Test
     void getAvailableDeliveries() {
+        //Er zijn verschillende types van beschikbare orders. Elk zijn ze om de één of andere reden niet beschikbaar, met uitzondering van 1. Zie testdata voor meer detail
         Collection<Order> availableDeliveries = ctrl.getAvailableDeliveries(ads);
         assertEquals(1, availableDeliveries.size(), "Slechts één order voldoet aan de voorwaarden");
-        assertEquals(ctrl.getOrderCatalog().getOrders().stream().findFirst().get(), availableDeliveries.stream().findFirst().get());
+        assertEquals(ctrl.getOrderService().getOrders().stream().findFirst().get(), availableDeliveries.stream().findFirst().get());
 
     }
 
     @Test
     void selectDelivery() {
+
     }
 
     @Test

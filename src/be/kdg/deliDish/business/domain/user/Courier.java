@@ -1,4 +1,4 @@
-package be.kdg.deliDish.business.domain.courier;
+package be.kdg.deliDish.business.domain.user;
 
 
 import be.kdg.foundation.contact.ContactInfo;
@@ -8,20 +8,26 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Courier {
-    private String firstName;
-    private String lastName;
-    private ContactInfo contactInfo;
+public class Courier extends User {
+
     private Position currentPosition;
     private boolean isAvailable;
     private List<DeliveryPointEvent> pointEvents = new ArrayList<>();
+    private Partner partner;
 
-    public Courier(String firstName, String lastName, ContactInfo contactInfo, Position currentPosition) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.contactInfo = contactInfo;
+    public Courier(String firstName, String lastName, ContactInfo contactInfo, Position currentPosition, Partner partner) {
+        super(firstName, lastName, contactInfo);
         this.currentPosition = currentPosition;
+        this.partner = partner;
         this.isAvailable = true;
+    }
+
+    public Partner getPartner() {
+        return partner;
+    }
+
+    public void setPartner(Partner partner) {
+        this.partner = partner;
     }
 
     public boolean switchAvailability() {

@@ -12,18 +12,26 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class BelgianAvailableDeliveriesService implements AvailableDeliveriesService {
+public class BelgianAvailableDeliveriesSelector implements AvailableDeliveriesSelector {
     private static final double MIN_PER_KM = 4;
-    private UserService userSvc;
-    private OrderService orderSvc;
-    private RestoService restoSvc;
+    private UserService us;
+    private OrderService os;
+    private RestoService rs;
+    private Courier requestingCourier;
 
-    public BelgianAvailableDeliveriesService(UserService userSvc, OrderService os, RestoService rs) {
-        this.userSvc = userSvc;
-        this.orderSvc = os;
-        this.restoSvc = rs;
+    public BelgianAvailableDeliveriesSelector(UserService us, OrderService os, RestoService rs) {
+        this.us = us;
+        this.os = os;
+        this.rs = rs;
     }
 
+    public void setUs(UserService us) {
+        this.us = us;
+    }
+
+    public void setOs(OrderService os) {
+        this.os = os;
+    }
 
     /**
      * Gives a list of deliveries available for the requesting user. The requesting user as well ass the available orders and couriers must be set before running this method.
@@ -32,14 +40,14 @@ public class BelgianAvailableDeliveriesService implements AvailableDeliveriesSer
     @Override
     public Collection<Order> getAvailableDeliveries(Courier courier) {
 
-        List<Courier> availableCouriers = new ArrayList<>(userSvc.getAvailableCouriers());
-        List<Order> availableOrders = new ArrayList<>(orderSvc.getDeliverableOrders());
+        List<Courier> availableCouriers = new ArrayList<>(us.getAvailableCouriers());
+        List<Order> availableOrders = new ArrayList<>(os.getDeliverableOrders());
         List<List<Courier>> orderCouriers = new ArrayList<>();
         for (Order order : availableOrders) {
             List<Courier> couriersWithinTimeLimit = new ArrayList<>();
-            int prepTime = orderSvc.getOrderPreparationTime(order);
+            int prepTime = os.getOrderPreparationTime(order);
             for (Courier c : availableCouriers) {
-                double courierTimeToResto = timeToPosition(c.getCurrentPosition(), (orderSvc.getOrderResto(order)).getPosition());
+                double courierTimeToResto = timeToPosition(c.getCurrentPosition(), (os.getOrderResto(order)).getPosition());
                 if (order.getOrderPlacedDateTime().plus(prepTime, ChronoUnit.MINUTES).isAfter(LocalDateTime.now().plus((int) courierTimeToResto, ChronoUnit.MINUTES))) {
                     couriersWithinTimeLimit.add(c);
                 }
@@ -50,7 +58,7 @@ public class BelgianAvailableDeliveriesService implements AvailableDeliveriesSer
         for (int i = 0; i < availableOrders.size(); i++) {
             Order current = availableOrders.get(i);
             double averagePoints = calculateDeliveryPointAverage(orderCouriers.get(i));
-            if (averagePoints <= userSvc.getDeliveryPointsTotal(courier) && LocalDateTime.now().minus(5, ChronoUnit.MINUTES).isBefore(current.getOrderPlacedDateTime())) {
+            if (averagePoints <= us.getDeliveryPointsTotal(courier) && LocalDateTime.now().minus(5, ChronoUnit.MINUTES).isBefore(current.getOrderPlacedDateTime())) {
                 availableDeliveries.add(current);
             }
         }
@@ -69,6 +77,6 @@ public class BelgianAvailableDeliveriesService implements AvailableDeliveriesSer
      * @return
      */
     private double calculateDeliveryPointAverage(List<Courier> cs) {
-        return cs.stream().mapToDouble(c -> userSvc.getDeliveryPointsTotal(c)).average().getAsDouble();
+        return cs.stream().mapToDouble(c -> us.getDeliveryPointsTotal(c)).average().getAsDouble();
     }
 }

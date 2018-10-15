@@ -5,9 +5,11 @@ import java.time.LocalDateTime;
 public class DeliveryPointEvent {
     private final LocalDateTime eventTime;
     private final int points;
+    private final DeliveryPointEventType eventType;
 
-    public DeliveryPointEvent(int points) {
+    public DeliveryPointEvent(int points, DeliveryPointEventType eventType) {
         this.points = points;
+        this.eventType = eventType;
         eventTime = LocalDateTime.now();
     }
 
@@ -19,4 +21,7 @@ public class DeliveryPointEvent {
         return points;
     }
 
+    public enum DeliveryPointEventType {
+        ORDER_ACCEPTED, ORDER_PICKUP_ONTIME, ORDER_PICKUP_LATE;
+    }
 }

@@ -1,7 +1,7 @@
 package be.kdg.deliDish.application;
 
 
-import be.kdg.deliDish.business.AvailableDeliveriesService;
+import be.kdg.deliDish.business.AvailableDeliveriesSelector;
 import be.kdg.deliDish.business.OrderService;
 import be.kdg.deliDish.business.RestoService;
 import be.kdg.deliDish.business.UserService;
@@ -31,6 +31,7 @@ public class DeliveryController {
         userService = new UserService();
     }
 
+
     /**
      * Sets the sessionUser
      *
@@ -56,20 +57,24 @@ public class DeliveryController {
         orderService.addOrder(o);
     }
 
-    public Collection<Order> getAvailableDeliveries(AvailableDeliveriesService ads) {
+    public Collection<Order> getAvailableDeliveries(AvailableDeliveriesSelector ads) {
 
-        return ads.getAvailableDeliveries(appUser);
+        return orderService.getAvailableDeliveries(appUser);
     }
 
-    public void selectDelivery(int deliveryNr) {
-
-        //TODO: Complete use case deliver order event deliverySelection
-        // Makes a new orderEvent and sets user unavailable
+    public void selectDelivery(int orderId) {
+        orderService.assignOrder(orderId, appUser);
+        userService.assignOrderAcceptedPoints(appUser);
+        appUser.setAvailable(false);
     }
 
-    public void registerDeliveryPickup(int deliveryNr) {
-        //TODO: Complete use case deliver order event registerDeliveryPickup
-        // Makes a new orderEvent and if in time DeliveryPoints are added.
+    public void registerDeliveryPickup(int orderId) {
+        Order o = orderService.registerOrderPickup(orderId);
+        if (orderService.isOnTimePickup(o)) {
+            userService.addOnTimePickupPoints(appUser);
+        } else {
+            userService.deductLatePickupPoints(appUser);
+        }
     }
 
     public void registerSuccesfullDelivery(int deliveryNr) {

@@ -1,7 +1,7 @@
 package be.kdg.deliDish.application;
 
-import be.kdg.deliDish.business.AvailableDeliveriesService;
-import be.kdg.deliDish.business.BelgianAvailableDeliveriesService;
+import be.kdg.deliDish.business.AvailableDeliveriesSelector;
+import be.kdg.deliDish.business.BelgianAvailableDeliveriesSelector;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.restaurant.Restaurant;
 import be.kdg.deliDish.business.domain.user.Courier;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class DeliveryControllerTest {
     private static DeliveryController ctrl;
-    private static AvailableDeliveriesService ads;
+    private static AvailableDeliveriesSelector ads;
 
     @BeforeAll
     public static void setUp() {
@@ -28,7 +28,8 @@ public class DeliveryControllerTest {
 
         ctrl = new DeliveryController();
         ctrl.setAppUser(data.getCouriers().get(0));
-        ads = new BelgianAvailableDeliveriesService(ctrl.getUserService(), ctrl.getOrderService(), ctrl.getRestoCatalog());
+        ads = new BelgianAvailableDeliveriesSelector(ctrl.getUserService(), ctrl.getOrderService(), ctrl.getRestoCatalog());
+        ctrl.getOrderService().setAvailableDeliveriesSelector(ads);
 
         //Load testdata into repositories
         for (Courier courier : data.getCouriers()) {

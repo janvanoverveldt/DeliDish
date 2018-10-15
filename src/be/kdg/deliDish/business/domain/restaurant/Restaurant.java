@@ -5,8 +5,7 @@ import be.kdg.deliDish.business.domain.user.Partner;
 import be.kdg.foundation.contact.Adress;
 import be.kdg.foundation.contact.Position;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Restaurant {
     private String name;
@@ -36,4 +35,17 @@ public class Restaurant {
     public Position getPosition() {
         return adres.getPosition();
     }
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Restaurant that = (Restaurant) o;
+		return Objects.equals(name, that.name);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name);
+	}
 }

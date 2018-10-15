@@ -5,8 +5,7 @@ import be.kdg.deliDish.business.domain.user.Customer;
 import be.kdg.foundation.contact.Adress;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Order {
     private int orderID;
@@ -61,4 +60,17 @@ public class Order {
     public int getOrderID() {
         return orderID;
     }
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Order order = (Order) o;
+		return orderID == order.orderID;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(orderID);
+	}
 }

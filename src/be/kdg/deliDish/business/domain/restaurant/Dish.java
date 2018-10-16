@@ -1,8 +1,9 @@
 package be.kdg.deliDish.business.domain.restaurant;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Dish {
+public class Dish implements Serializable {
     private String name;
     private String description;
     private double price;

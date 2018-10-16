@@ -1,6 +1,8 @@
 package be.kdg.foundation.contact;
 
-public class Position {
+import java.io.Serializable;
+
+public class Position implements Serializable {
     private final double longitude;
     private final double lattitude;
 

@@ -4,10 +4,11 @@ import be.kdg.deliDish.business.domain.user.Courier;
 import be.kdg.deliDish.business.domain.user.Customer;
 import be.kdg.foundation.contact.Adress;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class Order {
+public class Order implements Serializable {
     private int orderID;
     private List<OrderEvent> events = new ArrayList<>();
     private List<OrderLine> orderlines;

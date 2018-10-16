@@ -2,7 +2,9 @@ package be.kdg.deliDish.business.domain.user;
 
 import be.kdg.foundation.financial.RekeningNummer;
 
-public class Partner {
+import java.io.Serializable;
+
+public class Partner implements Serializable {
     private RekeningNummer rekeningNummer;
 
     public Partner(RekeningNummer rekeningNummer) {

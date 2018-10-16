@@ -2,7 +2,9 @@ package be.kdg.deliDish.business.domain.order;
 
 import be.kdg.deliDish.business.domain.restaurant.Dish;
 
-public class OrderLine {
+import java.io.Serializable;
+
+public class OrderLine implements Serializable {
     private Dish dish;
     private int quantity;
     private String remark;

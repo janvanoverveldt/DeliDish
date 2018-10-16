@@ -1,5 +1,7 @@
 package be.kdg.infra;
 
+import java.io.*;
+import java.rmi.ServerError;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -8,66 +10,93 @@ import java.util.stream.Stream;
 /**
  * Created by jan on 3/12/2016.
  */
-public class MemoryRepository<V> implements Repository<V> {
+public class MemoryRepository<V extends Serializable> implements Repository<V > {
 
-    private Set<V> data = new HashSet<>();
+	private Map<Integer, byte[]> data = new HashMap<>();
 
 
-    @Override
-    public Collection<V> entities() {
-        return data;
-    }
+	@Override
+	public Collection<V> entities() {
+		return asStream().collect(Collectors.toSet());
+	}
 
-    @Override
-    public boolean put(V value) {
-        return data.add(value);
-    }
+	public boolean put(V value) {
+		if (value == null) {
+			return false;
+		}
+		return data.put(getKey(value), marshall( value)) != null;
+	}
 
-    /**
-     * Just a wrapper around addContract for update semantics
-     *
-     * @param entity entity to be updated
-     */
-    @Override
-    public void update(V entity) {
-        put(entity);
-    }
+	private byte[] marshall(Serializable entity) {
+		try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		     ObjectOutput out = new ObjectOutputStream(bos)) {
+			out.writeObject(entity);
+			return bos.toByteArray();
+		} catch (IOException e) {
+			System.err.println("Error marshalling " + entity + "\n" + e);
+			return null;
+		}
+	}
 
-    public Collection<V> findWhere(Predicate<V> predicate) {
-        return findStream(predicate).collect(Collectors.toSet());
-    }
+	private V unmarshall(byte[] marshalled) {
+		if (marshalled == null) return null;
+		try (ByteArrayInputStream bis = new ByteArrayInputStream(marshalled);
+		     ObjectInput in = new ObjectInputStream(bis)) {
+			return (V) in.readObject();
+		} catch (IOException | ClassNotFoundException e) {
+			System.err.println("Error unmarshalling "  + e);
+			return null;
+		}
+	}
 
-    private Stream<V> findStream(Predicate<V> predicate) {
-        return data.stream().filter(predicate);
-    }
+	private int getKey(Object entity) {
+		return entity.hashCode();
+	}
 
-    @Override
-    public List<V> findWhere(Predicate<V> predicate, Comparator<V> sorter) {
-        Stream<V> result = findStream(predicate);
-        if (sorter != null) {
-            result = result.sorted(sorter);
-        }
-        return result.collect(Collectors.toList());
-    }
+	/**
+	 * Just a wrapper around addContract for update semantics
+	 *
+	 * @param entity entity to be updated
+	 */
+	@Override
+	public void update(V entity) {
+		put(entity);
+	}
 
-    @Override
-    public V findOneWhere(Predicate<V> predicate) {
-        return findStream(predicate).findAny
-                ().orElse(null);
-    }
+	public Collection<V> findWhere(Predicate<V> predicate) {
+		return findStream(predicate).collect(Collectors.toSet());
+	}
 
-    /**
-     * @param entity entity die we uit de dB willen restoren
-     * @return the entity as in the repo or null
-     * For efficiency reasons the store would better be implemented as a Map
-     */
-    @Override
-    public V get(V entity) {
-        for (V e : data) {
-            if (e.equals(entity)) {
-                return e;
-            }
-        }
-        return null;
-    }
+	private Stream<V> findStream(Predicate<V> predicate) {
+		return asStream().filter(predicate);
+	}
+
+	private Stream<V> asStream(){
+		return data.values().stream().map(v -> unmarshall(v));
+	}
+
+	@Override
+	public List<V> findWhere(Predicate<V> predicate, Comparator<V> sorter) {
+		Stream<V> result = findStream(predicate);
+		if (sorter != null) {
+			result = result.sorted(sorter);
+		}
+		return result.collect(Collectors.toList());
+	}
+
+	@Override
+	public V findOneWhere(Predicate<V> predicate) {
+		return findStream(predicate).findAny
+			().orElse(null);
+	}
+
+	/**
+	 * @param entity entity die we uit de dB willen restoren
+	 * @return the entity as in the repo or null
+	 * For efficiency reasons the store would better be implemented as a Map
+	 */
+	@Override
+	public V get(V entity) {
+		return unmarshall(data.get(getKey(entity) ));
+	}
 }

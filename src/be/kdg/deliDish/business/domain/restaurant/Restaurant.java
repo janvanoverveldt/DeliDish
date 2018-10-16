@@ -5,9 +5,10 @@ import be.kdg.deliDish.business.domain.user.Partner;
 import be.kdg.foundation.contact.Adress;
 import be.kdg.foundation.contact.Position;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Restaurant {
+public class Restaurant implements Serializable {
     private String name;
     private Adress adres;
     private List<OpeningPeriod> openingShedule = new ArrayList<>();

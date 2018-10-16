@@ -1,8 +1,9 @@
 package be.kdg.deliDish.business.domain.user;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class DeliveryPointEvent {
+public class DeliveryPointEvent implements Serializable {
     private final LocalDateTime eventTime;
     private final int points;
     private final DeliveryPointEventType eventType;
@@ -22,6 +23,6 @@ public class DeliveryPointEvent {
     }
 
     public enum DeliveryPointEventType {
-        ORDER_ACCEPTED, ORDER_PICKUP_ONTIME, ORDER_PICKUP_LATE;
+        ORDER_ACCEPTED, ORDER_PICKUP_ONTIME, ORDER_PICKUP_LATE
     }
 }

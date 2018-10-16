@@ -1,11 +1,12 @@
 package be.kdg.foundation.contact;
 
+import java.io.Serializable;
 import java.util.logging.Logger;
 
 /**
  * @author Jan de Rijke.
  */
-public class Adress {
+public class Adress implements Serializable {
     private static Logger logger = Logger.getLogger("be.kdg.foundation.contact.Adres");
     private final Gemeente gemeente;
     private final String nummer;

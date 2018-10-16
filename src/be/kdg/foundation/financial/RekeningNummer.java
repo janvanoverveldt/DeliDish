@@ -1,13 +1,14 @@
 package be.kdg.foundation.financial;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 
 /**
  * DataType class
  */
-public class RekeningNummer {
-    final String rekeningnummer;
+public class RekeningNummer implements Serializable {
+    private final String rekeningnummer;
 
     public RekeningNummer(String rekeningnummer) {
         this.rekeningnummer = rekeningnummer;

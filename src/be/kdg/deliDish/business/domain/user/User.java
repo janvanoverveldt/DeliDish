@@ -2,9 +2,10 @@ package be.kdg.deliDish.business.domain.user;
 
 import be.kdg.foundation.contact.ContactInfo;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class User {
+public class User implements Serializable {
     private String firstName;
     private String lastName;
     private ContactInfo contactInfo;

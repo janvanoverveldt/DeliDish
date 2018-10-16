@@ -1,9 +1,11 @@
 package be.kdg.foundation.contact;
 
+import java.io.Serializable;
+
 /**
  * @author Jan de Rijke.
  */
-public class ContactInfo {
+public class ContactInfo implements Serializable {
     // TODO0: implementeer klasse
     private Adress adres;
     private String email;

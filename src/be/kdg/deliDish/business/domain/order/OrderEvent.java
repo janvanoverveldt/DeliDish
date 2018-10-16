@@ -1,8 +1,9 @@
 package be.kdg.deliDish.business.domain.order;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class OrderEvent {
+public class OrderEvent implements Serializable {
     private final LocalDateTime timestamp;
     private final OrderState orderState;
     private final String remark;

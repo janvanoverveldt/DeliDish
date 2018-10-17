@@ -88,6 +88,7 @@ public class OrderService {
         Order o = getOrder(orderId);
         o.setDeliverer(appUser);
         o.addEvent(new OrderEvent(OrderState.COURIER_ASSIGNED, "No Remark"));
+        orderRepo.update(o);
         return o;
 
     }

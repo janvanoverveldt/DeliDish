@@ -1,7 +1,6 @@
 package be.kdg.infra;
 
 import java.io.*;
-import java.rmi.ServerError;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -9,6 +8,11 @@ import java.util.stream.Stream;
 
 /**
  * Created by jan on 3/12/2016.
+ * This memory repository enables you to make a repository for any given classtype with default functionality
+ * (entities, get, put, find, findWhere and findOneWhere)
+ * ex. private final MemoryRepository<Order> orderRepo = new MemoryRepository<>();
+ * Objects in the repo are not automagically updated after manipulating an object in de bussinesslayer.
+ * Therefore you are obligated to always persist changes after an update.
  */
 public class MemoryRepository<V extends Serializable> implements Repository<V > {
 
@@ -63,6 +67,10 @@ public class MemoryRepository<V extends Serializable> implements Repository<V > 
 		put(entity);
 	}
 
+	/**
+	 * @param predicate (ex. V -> V.getName().equals("Jos"))
+	 * @return
+	 */
 	public Collection<V> findWhere(Predicate<V> predicate) {
 		return findStream(predicate).collect(Collectors.toSet());
 	}
@@ -74,6 +82,7 @@ public class MemoryRepository<V extends Serializable> implements Repository<V > 
 	private Stream<V> asStream(){
 		return data.values().stream().map(v -> unmarshall(v));
 	}
+
 
 	@Override
 	public List<V> findWhere(Predicate<V> predicate, Comparator<V> sorter) {

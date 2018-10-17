@@ -58,7 +58,7 @@ public class BelgianAvailableDeliveriesSelector implements AvailableDeliveriesSe
         for (int i = 0; i < availableOrders.size(); i++) {
             Order current = availableOrders.get(i);
             double averagePoints = calculateDeliveryPointAverage(orderCouriers.get(i));
-            if (averagePoints <= us.getDeliveryPointsTotal(courier) && LocalDateTime.now().minus(5, ChronoUnit.MINUTES).isBefore(current.getOrderPlacedDateTime())) {
+            if (averagePoints <= us.getDeliveryPointsTotal(courier) && LocalDateTime.now().minus(5, ChronoUnit.MINUTES).isAfter(current.getOrderPlacedDateTime())) {
                 availableDeliveries.add(current);
             }
         }
@@ -67,7 +67,7 @@ public class BelgianAvailableDeliveriesSelector implements AvailableDeliveriesSe
     }
 
     private double timeToPosition(Position start, Position dest) {
-        return DistanceCalculator.getDistance(start, dest) * MIN_PER_KM;
+        return new DistanceCalculator().getDistance(start, dest) * MIN_PER_KM;
     }
 
     /**

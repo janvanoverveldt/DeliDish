@@ -10,7 +10,7 @@ import org.locationtech.spatial4j.shape.Point;
  * It depends on an external package.
  */
 public class DistanceCalculator {
-    private static SpatialContext ctx = SpatialContext.GEO;
+
 
     /**
      * Returns the distance between two positions.
@@ -19,8 +19,9 @@ public class DistanceCalculator {
      * @param second
      * @return
      */
-    public static double getDistance(Position first, Position second) {
+    public double getDistance(Position first, Position second) {
         // transform to point
+        SpatialContext ctx = SpatialContext.GEO;
         Point firstPoint = ctx.getShapeFactory().pointXY(first.getLattitude(), first.getLongitude());
         Point secondPoint = ctx.getShapeFactory().pointXY(second.getLattitude(), second.getLongitude());
         return DistanceUtils.DEG_TO_KM * ctx.calcDistance(firstPoint, secondPoint);

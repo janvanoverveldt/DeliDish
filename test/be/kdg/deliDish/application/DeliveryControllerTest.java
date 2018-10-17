@@ -45,8 +45,6 @@ public class DeliveryControllerTest {
         for (Order order : data.getOrders()) {
             ctrl.addOrder(order);
         }
-
-
     }
 
 
@@ -56,7 +54,6 @@ public class DeliveryControllerTest {
         Collection<Order> availableDeliveries = ctrl.getAvailableDeliveries(ads);
         assertEquals(1, availableDeliveries.size(), "Slechts één order voldoet aan de voorwaarden");
         assertEquals(ctrl.getOrderService().getOrders().stream().findFirst().get(), availableDeliveries.stream().findFirst().get());
-
     }
 
     @Test

@@ -1,6 +1,7 @@
 package be.kdg.deliDish.business;
 
 import be.kdg.deliDish.business.delivery.AvailableDeliveriesSelector;
+import be.kdg.deliDish.business.delivery.DefaultAvailableDeliveriesSelector;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.order.OrderEvent;
 import be.kdg.deliDish.business.domain.order.OrderLine;
@@ -11,25 +12,38 @@ import be.kdg.foundation.contact.Position;
 import be.kdg.infra.MemoryRepository;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Optional;
+import java.util.*;
 
 public class OrderService {
+    private static int orerIdSequence = 0;
     private final MemoryRepository<Order> orderRepo = new MemoryRepository<>();
     private RestoService rc;
     private AvailableDeliveriesSelector ads;
-    private static int orerIdSequence = 0;
+    private Map<String, AvailableDeliveriesSelector> availableDeliverieSelectors;
 
     public OrderService() {
-
+        availableDeliverieSelectors = new HashMap<>();
+        availableDeliverieSelectors.put("Default", new DefaultAvailableDeliveriesSelector(this));
     }
 
-    public void setAvailableDeliveriesSelector(AvailableDeliveriesSelector ads) {
+    /**
+     * Sequence for OrderIds
+     *
+     * @return newly generated orderId
+     */
+    public static int generateOrderId() {
+        return orerIdSequence++;
+    }
+
+    public void addAvailableDeliveriesSelector(String country, AvailableDeliveriesSelector ads) {
         this.ads = ads;
     }
 
     public Collection<Order> getAvailableDeliveries(Courier courier) {
+        AvailableDeliveriesSelector ads = availableDeliverieSelectors.get(courier.getContactInfo().getAdress().getCity().getCountry());
+        if (ads == null) {
+            ads = availableDeliverieSelectors.get("Default");
+        }
         return ads.getAvailableDeliveries(courier);
     }
 
@@ -58,11 +72,11 @@ public class OrderService {
         return o.getDeliveryAdress().getPosition();
     }
 
-    public Restaurant getOrderResto(Order o) {
+    public Restaurant getResto(Order o) {
         return o.getOrderlines().get(0).getDish().getResto();
     }
 
-    public Position getOrderPosition(Order o) {
+    public Position getPosition(Order o) {
         return o.getOrderlines().get(0).getDish().getResto().getPosition();
     }
 
@@ -72,18 +86,13 @@ public class OrderService {
      * @param o
      * @return time in minutes (or -1 if order is Empty)
      */
-    public int getOrderPreparationTime(Order o) {
+    public int getPreparationTime(Order o) {
         Optional<OrderLine> longestOrderline = o.getOrderlines().stream().max(Comparator.comparing(ol -> ol.getDish().getProductionTime()));
         if (longestOrderline.isPresent()) {
             return longestOrderline.get().getDish().getProductionTime();
         }
         return -1;
     }
-
-    public static int generateOrderId() {
-        return orerIdSequence++;
-    }
-
 
     public Order getOrder(int orderId) {
         return (Order) orderRepo.findWhere(o -> o.getOrderID() == orderId);

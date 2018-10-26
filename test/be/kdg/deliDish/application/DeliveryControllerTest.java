@@ -1,5 +1,8 @@
 package be.kdg.deliDish.application;
 
+import be.kdg.deliDish.business.OrderService;
+import be.kdg.deliDish.business.RestoService;
+import be.kdg.deliDish.business.UserService;
 import be.kdg.deliDish.business.delivery.AvailableDeliveriesSelector;
 import be.kdg.deliDish.business.delivery.BelgianAvailableDeliveriesSelector;
 import be.kdg.deliDish.business.domain.order.Order;
@@ -20,16 +23,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DeliveryControllerTest {
     private static DeliveryController ctrl;
     private static AvailableDeliveriesSelector ads;
+    private static OrderService os;
+    private static UserService us;
+    private static RestoService rs;
+
 
     @BeforeAll
     public static void setUp() {
         // TODO0 initialiseer het systeem
         TestData data = new TestData();
 
-        ctrl = new DeliveryController();
+        os = new OrderService();
+        us = new UserService();
+        rs = new RestoService();
+
+        ctrl = new DeliveryController(os, us, rs);
         ctrl.setAppUser(data.getCouriers().get(0));
-        ads = new BelgianAvailableDeliveriesSelector(ctrl.getUserService(), ctrl.getOrderService(), ctrl.getRestoCatalog());
-        ctrl.getOrderService().setAvailableDeliveriesSelector(ads);
+        // Add the specialised Delevery selector. The default selector is created in de orderService itself.
+        os.addAvailableDeliveriesSelector("Belgium", new BelgianAvailableDeliveriesSelector(us, os));
 
         //Load testdata into repositories
         for (Courier courier : data.getCouriers()) {
@@ -51,9 +62,9 @@ public class DeliveryControllerTest {
     @Test
     void getAvailableDeliveries() {
         //Er zijn verschillende types van beschikbare orders. Elk zijn ze om de één of andere reden niet beschikbaar, met uitzondering van 1. Zie testdata voor meer detail
-        Collection<Order> availableDeliveries = ctrl.getAvailableDeliveries(ads);
+        Collection<Order> availableDeliveries = ctrl.getAvailableDeliveries();
         assertEquals(1, availableDeliveries.size(), "Slechts één order voldoet aan de voorwaarden");
-        assertEquals(ctrl.getOrderService().getOrders().stream().findFirst().get(), availableDeliveries.stream().findFirst().get());
+        assertEquals(os.getOrders().stream().findFirst().get(), availableDeliveries.stream().findFirst().get());
     }
 
     @Test

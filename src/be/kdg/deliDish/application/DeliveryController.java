@@ -4,7 +4,6 @@ package be.kdg.deliDish.application;
 import be.kdg.deliDish.business.OrderService;
 import be.kdg.deliDish.business.RestoService;
 import be.kdg.deliDish.business.UserService;
-import be.kdg.deliDish.business.delivery.AvailableDeliveriesSelector;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.restaurant.Restaurant;
 import be.kdg.deliDish.business.domain.user.Courier;
@@ -25,12 +24,11 @@ public class DeliveryController {
     private UserService userService;
 
 
-    public DeliveryController() {
-        orderService = new OrderService();
-        restoService = new RestoService();
-        userService = new UserService();
+    public DeliveryController(OrderService os, UserService is, RestoService rs) {
+        orderService = os;
+        restoService = rs;
+        userService = is;
     }
-
 
     /**
      * Sets the sessionUser
@@ -41,23 +39,12 @@ public class DeliveryController {
         this.appUser = appUser;
     }
 
-    public OrderService getOrderService() {
-        return orderService;
-    }
-
-    public UserService getUserService() {
-        return userService;
-    }
-
-    public RestoService getRestoCatalog() {
-        return restoService;
-    }
 
     public void addOrder(Order o) {
         orderService.addOrder(o);
     }
 
-    public Collection<Order> getAvailableDeliveries(AvailableDeliveriesSelector ads) {
+    public Collection<Order> getAvailableDeliveries() {
 
         return orderService.getAvailableDeliveries(appUser);
     }

@@ -13,8 +13,8 @@ import be.kdg.deliDish.business.domain.user.Courier;
 import be.kdg.deliDish.business.domain.user.Customer;
 import be.kdg.deliDish.business.domain.user.Partner;
 import be.kdg.foundation.contact.Adress;
+import be.kdg.foundation.contact.City;
 import be.kdg.foundation.contact.ContactInfo;
-import be.kdg.foundation.contact.Gemeente;
 import be.kdg.foundation.contact.Position;
 import be.kdg.foundation.financial.RekeningNummer;
 
@@ -43,13 +43,13 @@ class TestData {
 
     private List<Restaurant> restos = new ArrayList<>();
     private List<Courier> couriers = new ArrayList<>();
-    private List<Gemeente> gemeentes = new ArrayList<>();
+    private List<City> gemeentes = new ArrayList<>();
     private Customer customer;
 
     // Hieronder wordt de testdata opgezet.
 
     TestData() {
-        makeGemeentes();
+        makeCitys();
         makeRestaurants();
         makeCouriers();
         makeCustomer();
@@ -59,20 +59,21 @@ class TestData {
     /**
      * Maakt de Antwerpse districten aan om alles te testen
      */
-    private void makeGemeentes() {
-        gemeentes.add(new Gemeente("2000", "Antwerpen"));
-        gemeentes.add(new Gemeente("2600", "Berchem"));
-        gemeentes.add(new Gemeente("2040", "BerendrechtZandvlietLillo"));
-        gemeentes.add(new Gemeente("2140", "Borgerhout"));
-        gemeentes.add(new Gemeente("2100", "Deurne"));
-        gemeentes.add(new Gemeente("2180", "Ekeren"));
-        gemeentes.add(new Gemeente("2660", "Hoboken"));
-        gemeentes.add(new Gemeente("2170", "Merksem"));
-        gemeentes.add(new Gemeente("2610", "Wilrijk"));
+    private void makeCitys() {
+        gemeentes.add(new City("2000", "Antwerpen", "Belgium"));
+        gemeentes.add(new City("2600", "Berchem", "Belgium"));
+        gemeentes.add(new City("2040", "BerendrechtZandvlietLillo", "Belgium"));
+        gemeentes.add(new City("2140", "Borgerhout", "Belgium"));
+        gemeentes.add(new City("2100", "Deurne", "Belgium"));
+        gemeentes.add(new City("2180", "Ekeren", "Belgium"));
+        gemeentes.add(new City("2660", "Hoboken", "Belgium"));
+        gemeentes.add(new City("2170", "Merksem", "Belgium"));
+        gemeentes.add(new City("2610", "Wilrijk", "Belgium"));
+        gemeentes.add(new City("90210", "Beverly Hills", "United States"));
     }
     private void makeRestaurants() {
 
-        Restaurant r1 = new Restaurant("Didier's Place", new Adress("Tolstraat", "30", new Gemeente("2000", "Antwerpen"), new Position(51.210150, 4.397607)), new Partner(new RekeningNummer("BE58658963247896")));
+        Restaurant r1 = new Restaurant("Didier's Place", new Adress("Tolstraat", "30", gemeentes.get(0), new Position(51.210150, 4.397607)), new Partner(new RekeningNummer("BE58658963247896")));
         OpeningPeriod ro = new OpeningPeriod(DayOfWeek.FRIDAY, LocalTime.of(11, 30), LocalTime.of(23, 30));
         r1.addOpening(ro);
         List<Dish> dishes = new ArrayList<>();

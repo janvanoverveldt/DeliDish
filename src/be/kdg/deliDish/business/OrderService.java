@@ -39,6 +39,12 @@ public class OrderService {
         this.ads = ads;
     }
 
+    /**
+     * Returns deliveries that a specific courier can deliver. The selectionalgorithm depends on the country of the courier demanding the available deliveries.
+     *
+     * @param courier
+     * @return
+     */
     public Collection<Order> getAvailableDeliveries(Courier courier) {
         AvailableDeliveriesSelector ads = availableDeliverieSelectors.get(courier.getContactInfo().getAdress().getCity().getCountry());
         if (ads == null) {

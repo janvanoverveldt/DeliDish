@@ -114,7 +114,7 @@ class TestData {
         List<OrderLine> ols = new ArrayList<>();
         ols.add(ol);
         OrderEvent event = new OrderEvent(LocalDateTime.now().minus(3, ChronoUnit.MINUTES), OrderState.ORDER_PLACED, "");
-        Order o = new Order(ols, customer.getDeliveryAdresses().get(0), "Op de bovenste bel drukken (hard doordrukken)", customer, OrderService.generateOrderId());
+        Order o = new Order(ols, customer.getDeliveryAdresses().get(0), "Op de bovenste bel drukken (hard doordrukken)", customer, OrderService.generateOrderId(), 500);
         o.addEvent(event);
         orders.add(o);
         // TODO: Order die niet beschikbaar is omdat de Courier te ver verwijderd is.

@@ -6,7 +6,9 @@ import be.kdg.foundation.contact.Adress;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class Order implements Serializable {
     private int orderID;
@@ -16,14 +18,20 @@ public class Order implements Serializable {
     private String deliveryInstructions;
     private Customer customer;
     private Courier deliverer;
+    private int averageCourierDeliveryPoints;
 
 
-    public Order(List<OrderLine> orderlines, Adress deliveryAdress, String deliveryInstructions, Customer customer, int orderID) {
+    public Order(List<OrderLine> orderlines, Adress deliveryAdress, String deliveryInstructions, Customer customer, int orderID, int averageDeliveryPoints) {
         this.orderID = orderID;
         this.orderlines = orderlines;
         this.deliveryAdress = deliveryAdress;
         this.deliveryInstructions = deliveryInstructions;
         this.customer = customer;
+        this.averageCourierDeliveryPoints = averageDeliveryPoints;
+    }
+
+    public int getAverageCourierDeliveryPoints() {
+        return averageCourierDeliveryPoints;
     }
 
     public void setEvents(List<OrderEvent> events) {

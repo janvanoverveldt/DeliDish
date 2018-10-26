@@ -2,12 +2,12 @@ package be.kdg.deliDish.business;
 
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.user.Courier;
-import be.kdg.foundation.contact.DistanceCalculator;
+import be.kdg.distanceAPI.DistanceCalculator;
+import be.kdg.distanceAPI.Point;
 import be.kdg.foundation.contact.Position;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -40,43 +40,23 @@ public class BelgianAvailableDeliveriesSelector implements AvailableDeliveriesSe
     @Override
     public Collection<Order> getAvailableDeliveries(Courier courier) {
 
-        List<Courier> availableCouriers = new ArrayList<>(us.getAvailableCouriers());
         List<Order> availableOrders = new ArrayList<>(os.getDeliverableOrders());
-        List<List<Courier>> orderCouriers = new ArrayList<>();
+        List<Order> availableDeliveries = new ArrayList<>();
+
         for (Order order : availableOrders) {
-            List<Courier> couriersWithinTimeLimit = new ArrayList<>();
-            int prepTime = os.getOrderPreparationTime(order);
-            for (Courier c : availableCouriers) {
-                double courierTimeToResto = timeToPosition(c.getCurrentPosition(), (os.getOrderResto(order)).getPosition());
-                if (order.getOrderPlacedDateTime().plus(prepTime, ChronoUnit.MINUTES).isAfter(LocalDateTime.now().plus((int) courierTimeToResto, ChronoUnit.MINUTES))) {
-                    couriersWithinTimeLimit.add(c);
+            double courierTimeToResto = timeToPosition(courier.getCurrentPosition(), (os.getOrderResto(order)).getPosition());
+            if (order.getOrderPlacedDateTime().plus(os.getOrderPreparationTime(order), ChronoUnit.MINUTES).isAfter(LocalDateTime.now().plus((int) courierTimeToResto, ChronoUnit.MINUTES))
+                    && order.getAverageCourierDeliveryPoints() > us.getDeliveryPointsTotal(courier)) {
+                availableDeliveries.add(order);
                 }
             }
-            orderCouriers.add(couriersWithinTimeLimit);
-        }
-        Collection<Order> availableDeliveries = new ArrayDeque<>();
-        for (int i = 0; i < availableOrders.size(); i++) {
-            Order current = availableOrders.get(i);
-            double averagePoints = calculateDeliveryPointAverage(orderCouriers.get(i));
-            if (averagePoints > us.getDeliveryPointsTotal(courier) && LocalDateTime.now().minus(5, ChronoUnit.MINUTES).isAfter(current.getOrderPlacedDateTime())) {
-                availableDeliveries.add(current);
-            }
-        }
 
         return availableDeliveries;
     }
 
     private double timeToPosition(Position start, Position dest) {
-        return new DistanceCalculator().getDistance(start, dest) * MIN_PER_KM;
+        return new DistanceCalculator().getDistance(new Point(start.getLattitude(), start.getLongitude()), new Point(dest.getLattitude(), dest.getLongitude())) * MIN_PER_KM;
     }
 
-    /**
-     * Written in short stream notation. For loop also can be used.
-     *
-     * @param cs
-     * @return
-     */
-    private double calculateDeliveryPointAverage(List<Courier> cs) {
-        return cs.stream().mapToDouble(c -> us.getDeliveryPointsTotal(c)).average().getAsDouble();
-    }
+
 }

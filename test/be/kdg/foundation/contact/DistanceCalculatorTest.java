@@ -1,5 +1,6 @@
 package be.kdg.foundation.contact;
 
+import be.kdg.distanceAPI.DistanceCalculator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,10 +1,10 @@
 package be.kdg.deliDish.application;
 
 
-import be.kdg.deliDish.business.AvailableDeliveriesSelector;
 import be.kdg.deliDish.business.OrderService;
 import be.kdg.deliDish.business.RestoService;
 import be.kdg.deliDish.business.UserService;
+import be.kdg.deliDish.business.delivery.AvailableDeliveriesSelector;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.restaurant.Restaurant;
 import be.kdg.deliDish.business.domain.user.Courier;

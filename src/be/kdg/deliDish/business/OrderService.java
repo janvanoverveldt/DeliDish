@@ -1,5 +1,6 @@
 package be.kdg.deliDish.business;
 
+import be.kdg.deliDish.business.delivery.AvailableDeliveriesSelector;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.order.OrderEvent;
 import be.kdg.deliDish.business.domain.order.OrderLine;
@@ -59,6 +60,10 @@ public class OrderService {
 
     public Restaurant getOrderResto(Order o) {
         return o.getOrderlines().get(0).getDish().getResto();
+    }
+
+    public Position getOrderPosition(Order o) {
+        return o.getOrderlines().get(0).getDish().getResto().getPosition();
     }
 
     /**

@@ -16,6 +16,7 @@ public class Ride implements Tour {
     public Ride(Position start, Position dest, int minutesPerKm) {
         this.start = start;
         this.dest = dest;
+        this.minutesPerKm = minutesPerKm;
     }
 
     public double getDistance() {

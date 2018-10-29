@@ -11,6 +11,7 @@ import be.kdg.deliDish.business.domain.restaurant.OpeningPeriod;
 import be.kdg.deliDish.business.domain.restaurant.Restaurant;
 import be.kdg.deliDish.business.domain.user.Courier;
 import be.kdg.deliDish.business.domain.user.Customer;
+import be.kdg.deliDish.business.domain.user.DeliveryPointEvent;
 import be.kdg.deliDish.business.domain.user.Partner;
 import be.kdg.foundation.contact.Adress;
 import be.kdg.foundation.contact.City;
@@ -79,14 +80,13 @@ class TestData {
     }
 
     private void makeCouriers() {
-        Courier courierThatInteracts = new Courier("Frits", "Den Dichterbij", new ContactInfo(new Adress("Volkstraat", "10", cities.get(1), new Position(51.211759, 4.396674), new Partner(new RekeningNummer("BE58658963247896"))), "frits@kdg.be", "032545856"), new Position(51.219090, 4.399394), new Partner(new RekeningNummer("BE11111111111111111")));
-        Courier courierFar1 = new Courier("Frats", "Van Verre", new ContactInfo(new Adress("Nationalestraat", "10", cities.get(1), new Position(51.211759, 4.396674), new Partner(new RekeningNummer("BE58658963247896"))), "frats@kdg.be", "05652456"), new Position(51.220717, 4.471559), new Partner(new RekeningNummer("BE22222222222222")));
+        Courier courierThatInteracts = new Courier("Frits", "Den Dichterbij", new ContactInfo(new Adress("Volkstraat", "10", cities.get(1), new Position(51.211759, 4.396674)), "frits@kdg.be", "032545856"), new Position(51.219090, 4.399394), new Partner(new RekeningNummer("BE11111111111111111")));
+        DeliveryPointEvent dpe = new DeliveryPointEvent(501, DeliveryPointEvent.DeliveryPointEventType.ORDER_PICKUP_ONTIME);
+        courierThatInteracts.addPointEvent(dpe);
         couriers.add(courierThatInteracts);
-        couriers.add(courierFar1);
-        //TODO: Add unavailable courier
-        //TODO: Add couriers around resto at one site of city . +50% have more points than mainCourier
-        //TODO: Add couriers around resto at one other of city. -50% have more points than mainCourier
-        //TODO: One of the orders must be not visible because of he has less than average points than the other available couriers.
+        Courier courierWithOtherAlgoritm = new Courier("Frats", "Van UitAmerica", new ContactInfo(new Adress("BlaBla", "10", cities.get(9), new Position(51.211759, 4.396674)), "frits@kdg.be", "032545856"), new Position(51.219090, 4.399394), new Partner(new RekeningNummer("BE11111111111111111")));
+        DeliveryPointEvent dpe2 = new DeliveryPointEvent(501, DeliveryPointEvent.DeliveryPointEventType.ORDER_PICKUP_ONTIME);
+        couriers.add(courierWithOtherAlgoritm);
 
     }
 
@@ -103,11 +103,11 @@ class TestData {
      * Maakt verschillende orders aan
      */
     private void maakOrders() {
-        maakOrder(restos.get(0).getDish(1), 3, OrderState.ORDER_PLACED, "Binnen eerste vijf minuten, maar courier heeft meer dan gemiddelde deliveryPoints", 500);
-        maakOrder(restos.get(0).getDish(1), 6, OrderState.ORDER_PLACED, "Na vijf minuten", 3000);
-        maakOrder(restos.get(0).getDish(1), 3, OrderState.ORDER_PLACED, "Courier te weinig delivery points", 3000);
-        maakOrder(restos.get(0).getDish(1), 6, OrderState.COURIER_ASSIGNED, "Status verkeer", 500);
-        maakOrder(restos.get(1).getDish(1), 6, OrderState.COURIER_ASSIGNED, "Resto te ver", 500);
+        maakOrder(restos.get(0).getDish(0), 3, OrderState.ORDER_PLACED, "Binnen eerste vijf minuten, maar courier heeft meer dan gemiddelde deliveryPoints", 500);
+        maakOrder(restos.get(0).getDish(0), 6, OrderState.ORDER_PLACED, "Na vijf minuten", 3000);
+        maakOrder(restos.get(0).getDish(0), 3, OrderState.ORDER_PLACED, "Courier te weinig delivery points", 3000);
+        maakOrder(restos.get(0).getDish(0), 6, OrderState.COURIER_ASSIGNED, "Status verkeerd", 500);
+        maakOrder(restos.get(1).getDish(0), 6, OrderState.ORDER_PLACED, "Resto te ver", 500);
 
     }
 

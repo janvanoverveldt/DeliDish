@@ -7,6 +7,7 @@ import java.util.logging.Logger;
  * Sort wordt gebruikt om de gegevens te sorten. Voorbeeld new Sort("naam", Order.ASCENDING).
  * Dit wordt meegegeven aan de Repository die op zijn beurt op basis van deze info een gesorteerde collectie kan teruggeven.
  */
+//TODO: Kan verwijderd worden.
 public class Sort {
     private static Logger logger = Logger.getLogger("be.kdg.foundation.operatie.Sort");
 

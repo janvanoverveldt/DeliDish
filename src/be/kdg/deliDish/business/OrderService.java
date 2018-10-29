@@ -17,8 +17,6 @@ import java.util.*;
 public class OrderService {
     private static int orerIdSequence = 0;
     private final MemoryRepository<Order> orderRepo = new MemoryRepository<>();
-    private RestoService rc;
-    private AvailableDeliveriesSelector ads;
     private Map<String, AvailableDeliveriesSelector> availableDeliverieSelectors;
 
     public OrderService() {
@@ -36,7 +34,7 @@ public class OrderService {
     }
 
     public void addAvailableDeliveriesSelector(String country, AvailableDeliveriesSelector ads) {
-        this.ads = ads;
+        availableDeliverieSelectors.put(country, ads);
     }
 
     /**
@@ -57,9 +55,6 @@ public class OrderService {
         orderRepo.put(order);
     }
 
-    public void setRc(RestoService rc) {
-        this.rc = rc;
-    }
 
     /**
      * Gets all orders in de repository
@@ -94,36 +89,35 @@ public class OrderService {
      */
     public int getPreparationTime(Order o) {
         Optional<OrderLine> longestOrderline = o.getOrderlines().stream().max(Comparator.comparing(ol -> ol.getDish().getProductionTime()));
-        if (longestOrderline.isPresent()) {
-            return longestOrderline.get().getDish().getProductionTime();
-        }
-        return -1;
+        return longestOrderline.map(orderLine -> orderLine.getDish().getProductionTime()).orElse(-1);
     }
 
     public Order getOrder(int orderId) {
-        return (Order) orderRepo.findWhere(o -> o.getOrderID() == orderId);
+        return orderRepo.findOneWhere(o -> o.getOrderID() == orderId);
     }
 
     public Order assignOrder(int orderId, Courier appUser) {
-        Order o = getOrder(orderId);
+        Order o = registerOrderEvent(orderId, OrderState.COURIER_ASSIGNED, "");
         o.setDeliverer(appUser);
-        o.addEvent(new OrderEvent(OrderState.COURIER_ASSIGNED, "No Remark"));
-        orderRepo.update(o);
         return o;
-
     }
 
     public Order registerOrderPickup(int orderId) {
-        Order o = getOrder(orderId);
-        o.addEvent(new OrderEvent(OrderState.DISHES_UNDERWAY, "No Remark"));
-        return o;
+        return registerOrderEvent(orderId, OrderState.DISHES_UNDERWAY, "");
     }
 
     public boolean isOnTimePickup(Order o) {
-        if (o.getOrderPlacedDateTime().plusMinutes(o.getOrderlines().stream().mapToInt(ol -> ol.getDish().getProductionTime()).max().getAsInt()).isBefore(LocalDateTime.now())) {
-            return false;
-        } else {
-            return true;
-        }
+        return !o.getOrderPlacedDateTime().plusMinutes(o.getOrderlines().stream().mapToInt(ol -> ol.getDish().getProductionTime()).max().getAsInt()).isBefore(LocalDateTime.now());
+    }
+
+    public Order registerDelivery(int orderId) {
+        return registerOrderEvent(orderId, OrderState.DELIVERED, "");
+    }
+
+    private Order registerOrderEvent(int orderId, OrderState state, String remark) {
+        Order o = getOrder(orderId);
+        o.addEvent(new OrderEvent(state, remark));
+        orderRepo.update(o);
+        return o;
     }
 }

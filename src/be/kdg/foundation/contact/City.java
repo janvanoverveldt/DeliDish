@@ -8,9 +8,11 @@ import java.util.logging.Logger;
  */
 public class City implements Serializable {
     private static Logger logger = Logger.getLogger("be.kdg.foundation.contact.Gemeente");
+    private final String country;
     private final String postal;
     private final String name;
-    private final String country;
+
+
 
     public City(String postal, String name, String country) {
         this.postal = postal;

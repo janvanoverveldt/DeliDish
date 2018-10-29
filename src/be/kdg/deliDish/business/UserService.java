@@ -11,8 +11,8 @@ public class UserService {
     private final MemoryRepository<Customer> customerRepo = new MemoryRepository<>();
     private final MemoryRepository<Courier> courierRepo = new MemoryRepository<>();
     private static int ORDER_ACCEPTED_POINTS = 5;
-    private static int ORDER_PICKUP_ONTIME = 5;
-    private static int ORDER_PICKUP_LATE = -5;
+    private static int ORDER_PICKUP_ONTIME_POINTS = 5;
+    private static int ORDER_PICKUP_LATE_POINTS = -5;
 
     public void addCustomer(Customer customer) {
         customerRepo.put(customer);
@@ -49,11 +49,11 @@ public class UserService {
     }
 
     public void addOnTimePickupPoints(Courier appUser) {
-        appUser.addPointEvent(new DeliveryPointEvent(ORDER_PICKUP_ONTIME, DeliveryPointEvent.DeliveryPointEventType.ORDER_PICKUP_ONTIME));
+        appUser.addPointEvent(new DeliveryPointEvent(ORDER_PICKUP_ONTIME_POINTS, DeliveryPointEvent.DeliveryPointEventType.ORDER_PICKUP_ONTIME));
     }
 
     public void deductLatePickupPoints(Courier appUser) {
-        appUser.addPointEvent(new DeliveryPointEvent(ORDER_PICKUP_LATE, DeliveryPointEvent.DeliveryPointEventType.ORDER_PICKUP_LATE));
+        appUser.addPointEvent(new DeliveryPointEvent(ORDER_PICKUP_LATE_POINTS, DeliveryPointEvent.DeliveryPointEventType.ORDER_PICKUP_LATE));
 
     }
 }

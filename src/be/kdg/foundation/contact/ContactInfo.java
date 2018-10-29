@@ -6,7 +6,6 @@ import java.io.Serializable;
  * @author Jan de Rijke.
  */
 public class ContactInfo implements Serializable {
-    // TODO0: implementeer klasse
     private Adress adress;
     private String email;
     private String tel;

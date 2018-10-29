@@ -7,6 +7,7 @@ package be.kdg.foundation.operatie;
  * Een voorbeeldgebruik voor recept: new Operatie("naam", Operator.CONTAINS, "curry")).
  * De filter wordt doorgegeven aan de Repository zodat deze de operaties kan gebruiken om de terug te geven collectie te filteren.
  */
+//TODO: This class is not used
 public class Operatie {
     private String field;
     private Operator operator;

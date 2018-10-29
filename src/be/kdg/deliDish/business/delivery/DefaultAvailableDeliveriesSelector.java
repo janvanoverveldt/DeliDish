@@ -7,7 +7,7 @@ import be.kdg.deliDish.business.domain.user.Courier;
 import java.util.Collection;
 
 public class DefaultAvailableDeliveriesSelector implements AvailableDeliveriesSelector {
-    OrderService os;
+    private OrderService os;
 
     public DefaultAvailableDeliveriesSelector(OrderService orderService) {
         os = orderService;

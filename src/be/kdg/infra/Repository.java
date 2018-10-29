@@ -1,6 +1,5 @@
 package be.kdg.infra;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;

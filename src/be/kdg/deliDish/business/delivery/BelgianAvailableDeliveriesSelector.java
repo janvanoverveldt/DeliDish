@@ -20,18 +20,10 @@ public class BelgianAvailableDeliveriesSelector implements AvailableDeliveriesSe
         this.os = os;
     }
 
-    public void setUs(UserService us) {
-        this.us = us;
-    }
-
-    public void setOs(OrderService os) {
-        this.os = os;
-    }
 
     /**
      * Gives a list of deliveries available for the requesting user. The requesting user as well ass the available orders and couriers must be set before running this method.
      */
-    //TODO: CurrentPosition niet in domain.
     @Override
     public Collection<Order> getAvailableDeliveries(Courier courier) {
 
@@ -41,7 +33,9 @@ public class BelgianAvailableDeliveriesSelector implements AvailableDeliveriesSe
         for (Order order : availableOrders) {
             Ride rideToRestaurant = new Ride(courier.getCurrentPosition(), os.getPosition(order), 4);
             if (order.getOrderPlacedDateTime().plus(os.getPreparationTime(order), ChronoUnit.MINUTES).isAfter(LocalDateTime.now().plus((int) rideToRestaurant.getDuration(), ChronoUnit.MINUTES))
-                    && order.getAverageCourierDeliveryPoints() > us.getDeliveryPointsTotal(courier)) {
+                    && (order.getAverageCourierDeliveryPoints() <= us.getDeliveryPointsTotal(courier)
+                    ||
+                    order.getOrderPlacedDateTime().plusMinutes(5).isBefore(LocalDateTime.now()))) {
                 availableDeliveries.add(order);
             }
         }

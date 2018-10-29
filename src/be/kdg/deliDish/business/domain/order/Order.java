@@ -21,6 +21,10 @@ public class Order implements Serializable {
     private int averageCourierDeliveryPoints;
 
 
+    public String getDeliveryInstructions() {
+        return deliveryInstructions;
+    }
+
     public Order(List<OrderLine> orderlines, Adress deliveryAdress, String deliveryInstructions, Customer customer, int orderID, int averageDeliveryPoints) {
         this.orderID = orderID;
         this.orderlines = orderlines;

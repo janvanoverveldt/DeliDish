@@ -22,12 +22,14 @@ public class DeliveryController {
     private OrderService orderService;
     private RestoService restoService;
     private UserService userService;
-
-
     public DeliveryController(OrderService os, UserService is, RestoService rs) {
         orderService = os;
         restoService = rs;
         userService = is;
+    }
+
+    public Courier getAppUser() {
+        return appUser;
     }
 
     /**
@@ -43,11 +45,6 @@ public class DeliveryController {
         orderService.addOrder(o);
     }
 
-    public Collection<Order> getAvailableDeliveries() {
-
-        return orderService.getAvailableDeliveries(appUser);
-    }
-
     public void addCourier(Courier courier) {
         userService.addCourier(courier);
     }
@@ -60,28 +57,39 @@ public class DeliveryController {
         restoService.addResto(restaurant);
     }
 
-    public void selectDelivery(int orderId) {
-        orderService.assignOrder(orderId, appUser);
-        userService.assignOrderAcceptedPoints(appUser);
-        appUser.setAvailable(false);
+
+    public Collection<Order> getAvailableDeliveries() {
+
+        return orderService.getAvailableDeliveries(appUser);
     }
 
-    public void registerDeliveryPickup(int orderId) {
+    public Order selectDelivery(int orderId) {
+        Order o = orderService.assignOrder(orderId, appUser);
+        userService.assignOrderAcceptedPoints(appUser);
+        appUser.setAvailable(false);
+        return o;
+    }
+
+    public Order registerDeliveryPickup(int orderId) {
         Order o = orderService.registerOrderPickup(orderId);
         if (orderService.isOnTimePickup(o)) {
             userService.addOnTimePickupPoints(appUser);
         } else {
             userService.deductLatePickupPoints(appUser);
         }
+        return o;
     }
 
-    public void registerSuccesfullDelivery(int deliveryNr) {
+    public Order registerSuccesfullDelivery(int orderId) {
+        Order o = orderService.registerDelivery(orderId);
+        if (orderService.isOnTimePickup(o)) {
+            userService.addOnTimePickupPoints(appUser);
+        } else {
+            userService.deductLatePickupPoints(appUser);
+        }
+        return o;
         //TODO: Complete use case deliver order event registerSuccesfullDelivery
         //Makes a new orderEvent, DeliveryPoints added, sets Courier available
-    }
-
-    public void getDeliveryPointsTotal() {
-
     }
 
 

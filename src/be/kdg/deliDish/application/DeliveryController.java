@@ -39,7 +39,6 @@ public class DeliveryController {
         this.appUser = appUser;
     }
 
-
     public void addOrder(Order o) {
         orderService.addOrder(o);
     }
@@ -47,6 +46,18 @@ public class DeliveryController {
     public Collection<Order> getAvailableDeliveries() {
 
         return orderService.getAvailableDeliveries(appUser);
+    }
+
+    public void addCourier(Courier courier) {
+        userService.addCourier(courier);
+    }
+
+    public void addCustomer(Customer customer) {
+        userService.addCustomer(customer);
+    }
+
+    public void addResto(Restaurant restaurant) {
+        restoService.addResto(restaurant);
     }
 
     public void selectDelivery(int orderId) {
@@ -73,16 +84,6 @@ public class DeliveryController {
 
     }
 
-    public void addCourier(Courier courier) {
-        userService.addCourier(courier);
-    }
 
-    public void addCustomer(Customer customer) {
-        userService.addCustomer(customer);
-    }
-
-    public void addResto(Restaurant restaurant) {
-        restoService.addResto(restaurant);
-    }
 
 }

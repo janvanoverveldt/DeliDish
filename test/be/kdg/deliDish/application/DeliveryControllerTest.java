@@ -30,7 +30,6 @@ public class DeliveryControllerTest {
 
     @BeforeAll
     public static void setUp() {
-        // TODO0 initialiseer het systeem
         TestData data = new TestData();
 
         os = new OrderService();

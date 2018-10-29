@@ -24,6 +24,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Deze klasse bevat test data.
@@ -43,7 +44,7 @@ class TestData {
 
     private List<Restaurant> restos = new ArrayList<>();
     private List<Courier> couriers = new ArrayList<>();
-    private List<City> gemeentes = new ArrayList<>();
+    private List<City> cities = new ArrayList<>();
     private Customer customer;
 
     // Hieronder wordt de testdata opgezet.
@@ -60,34 +61,26 @@ class TestData {
      * Maakt de Antwerpse districten aan om alles te testen
      */
     private void makeCitys() {
-        gemeentes.add(new City("2000", "Antwerpen", "Belgium"));
-        gemeentes.add(new City("2600", "Berchem", "Belgium"));
-        gemeentes.add(new City("2040", "BerendrechtZandvlietLillo", "Belgium"));
-        gemeentes.add(new City("2140", "Borgerhout", "Belgium"));
-        gemeentes.add(new City("2100", "Deurne", "Belgium"));
-        gemeentes.add(new City("2180", "Ekeren", "Belgium"));
-        gemeentes.add(new City("2660", "Hoboken", "Belgium"));
-        gemeentes.add(new City("2170", "Merksem", "Belgium"));
-        gemeentes.add(new City("2610", "Wilrijk", "Belgium"));
-        gemeentes.add(new City("90210", "Beverly Hills", "United States"));
+        cities.add(new City("2000", "Antwerpen", "Belgium"));
+        cities.add(new City("2600", "Berchem", "Belgium"));
+        cities.add(new City("2040", "BerendrechtZandvlietLillo", "Belgium"));
+        cities.add(new City("2140", "Borgerhout", "Belgium"));
+        cities.add(new City("2100", "Deurne", "Belgium"));
+        cities.add(new City("2180", "Ekeren", "Belgium"));
+        cities.add(new City("2660", "Hoboken", "Belgium"));
+        cities.add(new City("2170", "Merksem", "Belgium"));
+        cities.add(new City("2610", "Wilrijk", "Belgium"));
+        cities.add(new City("90210", "Beverly Hills", "United States"));
     }
     private void makeRestaurants() {
+        maakResto("Resto dat niet zo ver af is", new Position(51.210150, 4.397607));
+        maakResto("Resto dat te ver af waardoor dishes niet dicht genoeg zijn", new Position(60, 10));
 
-        Restaurant r1 = new Restaurant("Didier's Place", new Adress("Tolstraat", "30", gemeentes.get(0), new Position(51.210150, 4.397607)), new Partner(new RekeningNummer("BE58658963247896")));
-        OpeningPeriod ro = new OpeningPeriod(DayOfWeek.FRIDAY, LocalTime.of(11, 30), LocalTime.of(23, 30));
-        r1.addOpening(ro);
-        List<Dish> dishes = new ArrayList<>();
-        ArrayList<Allergen> allergens = new ArrayList<>();
-        allergens.add(Allergen.Eggs);
-        new Dish("Ravioli Summervides", "Ravioli met rucola & Parmezaan, witte asperges, eigeelcrème, jus van Parmezaan (Vegetarisch)", 17.5, allergens, 30, 20, r1);
-        restos.add(r1);
-        //TODO: Add resto at one site of city. The resto must have dishes within reach of the main courier and the couriers at that site of the city
-        //TODO: Add resto at other site of city.IThe resto must have dishes within reach of the main courier and the couriers at that site of the city
     }
 
     private void makeCouriers() {
-        Courier courierThatInteracts = new Courier("Frits", "Den Dichterbij", new ContactInfo(new Adress("Volkstraat", "10", gemeentes.get(1), new Position(51.211759, 4.396674)), "frits@kdg.be", "032545856"), new Position(51.219090, 4.399394), new Partner(new RekeningNummer("BE11111111111111111")));
-        Courier courierFar1 = new Courier("Frats", "Van Verre", new ContactInfo(new Adress("Nationalestraat", "10", gemeentes.get(1), new Position(51.211759, 4.396674)), "frats@kdg.be", "05652456"), new Position(51.220717, 4.471559), new Partner(new RekeningNummer("BE22222222222222")));
+        Courier courierThatInteracts = new Courier("Frits", "Den Dichterbij", new ContactInfo(new Adress("Volkstraat", "10", cities.get(1), new Position(51.211759, 4.396674), new Partner(new RekeningNummer("BE58658963247896"))), "frits@kdg.be", "032545856"), new Position(51.219090, 4.399394), new Partner(new RekeningNummer("BE11111111111111111")));
+        Courier courierFar1 = new Courier("Frats", "Van Verre", new ContactInfo(new Adress("Nationalestraat", "10", cities.get(1), new Position(51.211759, 4.396674), new Partner(new RekeningNummer("BE58658963247896"))), "frats@kdg.be", "05652456"), new Position(51.220717, 4.471559), new Partner(new RekeningNummer("BE22222222222222")));
         couriers.add(courierThatInteracts);
         couriers.add(courierFar1);
         //TODO: Add unavailable courier
@@ -98,8 +91,8 @@ class TestData {
     }
 
     private void makeCustomer() {
-        Adress deliveryAdress1 = new Adress("Nationalestraat", "10", gemeentes.get(0), new Position(51.214236, 4.398242));
-        Adress deliveryAdress2 = new Adress("Gravinstraat", "19", gemeentes.get(3), new Position(51.215090, 4.443523));
+        Adress deliveryAdress1 = new Adress("Nationalestraat", "10", cities.get(0), new Position(51.214236, 4.398242));
+        Adress deliveryAdress2 = new Adress("Gravinstraat", "19", cities.get(3), new Position(51.215090, 4.443523));
         List<Adress> delAdresses = new ArrayList<>();
         delAdresses.add(deliveryAdress1);
         delAdresses.add(deliveryAdress2);
@@ -110,19 +103,12 @@ class TestData {
      * Maakt verschillende orders aan
      */
     private void maakOrders() {
-        // Order die altijd beschikbaar moet zijn. De courier is dichtbij en er zijn geen
-        OrderLine ol = new OrderLine(restos.get(0).getDish(0), 4, "No remark");
-        List<OrderLine> ols = new ArrayList<>();
-        ols.add(ol);
-        OrderEvent event = new OrderEvent(LocalDateTime.now().minus(3, ChronoUnit.MINUTES), OrderState.ORDER_PLACED, "");
-        Order o = new Order(ols, customer.getDeliveryAdresses().get(0), "Op de bovenste bel drukken (hard doordrukken)", customer, OrderService.generateOrderId(), 500);
-        o.addEvent(event);
-        orders.add(o);
-        // TODO: Order die niet beschikbaar is omdat de Courier te ver verwijderd is.
+        maakOrder(restos.get(0).getDish(1), 3, OrderState.ORDER_PLACED, "Binnen eerste vijf minuten, maar courier heeft meer dan gemiddelde deliveryPoints", 500);
+        maakOrder(restos.get(0).getDish(1), 6, OrderState.ORDER_PLACED, "Na vijf minuten", 3000);
+        maakOrder(restos.get(0).getDish(1), 3, OrderState.ORDER_PLACED, "Courier te weinig delivery points", 3000);
+        maakOrder(restos.get(0).getDish(1), 6, OrderState.COURIER_ASSIGNED, "Status verkeer", 500);
+        maakOrder(restos.get(1).getDish(1), 6, OrderState.COURIER_ASSIGNED, "Resto te ver", 500);
 
-        // TODO: Order die niet beschikbaar is omdat de order < 5 min geplaatst is en meer dan 50% van de couriers die in de buurt is hebben een hogere delivery score.
-
-        // TODO: Order die wel beschikbaar is omdat de order < 5 min geplaatst is en minder dan 50% van de couriers die in de buurt is hebben een hogere delivery score.
     }
 
     public List<Order> getOrders() {
@@ -140,5 +126,28 @@ class TestData {
 
     public Customer getCustomer() {
         return customer;
+    }
+
+    public void maakOrder(Dish dish, long tijdGeleden, OrderState orderState, String orderTekst, int deliveryPoints) {
+        OrderLine ol = new OrderLine(dish, 4, "No remark");
+        List<OrderLine> ols = new ArrayList<>();
+        ols.add(ol);
+        OrderEvent event = new OrderEvent(LocalDateTime.now().minus(tijdGeleden, ChronoUnit.MINUTES), orderState, "");
+        Order o = new Order(ols, customer.getDeliveryAdresses().get(0), orderTekst + ": " + tijdGeleden + " min, " + orderState + ", " + deliveryPoints + " points", customer, OrderService.generateOrderId(), deliveryPoints);
+        o.addEvent(event);
+        orders.add(o);
+    }
+
+    public void maakResto(String naam, Position position) {
+        Restaurant r1 = new Restaurant(naam, new Adress(naam, String.valueOf(new Random().nextInt(100)), cities.get(0), position), new Partner(new RekeningNummer("BE58658963247896")));
+        OpeningPeriod ro = new OpeningPeriod(DayOfWeek.FRIDAY, LocalTime.of(11, 30), LocalTime.of(23, 30));
+        r1.addOpening(ro);
+        List<Dish> dishes = new ArrayList<>();
+        ArrayList<Allergen> allergens = new ArrayList<>();
+        allergens.add(Allergen.Eggs);
+        new Dish("Ravioli Summervides", "Ravioli met rucola & Parmezaan, witte asperges, eigeelcrème, jus van Parmezaan (Vegetarisch)", 17.5, allergens, 30, 20, r1);
+        restos.add(r1);
+
+
     }
 }

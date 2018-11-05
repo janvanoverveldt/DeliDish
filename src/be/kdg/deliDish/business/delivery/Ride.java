@@ -7,7 +7,7 @@ import be.kdg.foundation.contact.Position;
 /**
  *
  */
-public class Ride implements Tour {
+public class Ride implements Move {
     private Position start;
     private Position dest;
     private int minutesPerKm;

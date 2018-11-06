@@ -30,21 +30,21 @@ public class DeliveryController {
         this.appUser = appUser;
     }
 
-    // TODO Opdracht 3: Methode implementeren (wordt gebruikt om data beschikbaar te stellen
+    // TODO Opdracht 3: Methode implementeren (wordt gebruikt om data beschikbaar te stellen)
     public void addOrder(Order o) {
 
     }
 
-    // TODO Opdracht 3: Methode implementeren (wordt gebruikt om data beschikbaar te stellen
+    // TODO Opdracht 3: Methode implementeren (wordt gebruikt om data beschikbaar te stellen)
     public void addCourier(Courier courier) {
     }
 
-    // TODO Opdracht 3: Methode implementeren (wordt gebruikt om data beschikbaar te stellen
+    // TODO Opdracht 3: Methode implementeren (wordt gebruikt om data beschikbaar te stellen)
     public void addCustomer(Customer customer) {
 
     }
 
-    // TODO Opdracht 3: Methode implementeren (wordt gebruikt om data beschikbaar te stellen
+    // TODO Opdracht 3: Methode implementeren (wordt gebruikt om data beschikbaar te stellen)
     public void addResto(Restaurant restaurant) {
 
     }

@@ -1,9 +1,6 @@
 package be.kdg.deliDish.application;
 
 
-import be.kdg.deliDish.business.OrderService;
-import be.kdg.deliDish.business.RestoService;
-import be.kdg.deliDish.business.UserService;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.restaurant.Restaurant;
 import be.kdg.deliDish.business.domain.user.Courier;
@@ -18,15 +15,7 @@ import java.util.Collection;
 public class DeliveryController {
     //Session Info
     private Courier appUser;
-    // Orchestration classes
-    private OrderService orderService;
-    private RestoService restoService;
-    private UserService userService;
-    public DeliveryController(OrderService os, UserService is, RestoService rs) {
-        orderService = os;
-        restoService = rs;
-        userService = is;
-    }
+
 
     public Courier getAppUser() {
         return appUser;
@@ -41,55 +30,55 @@ public class DeliveryController {
         this.appUser = appUser;
     }
 
+    // TODO Opdracht 3: Methode implementeren (wordt gebruikt om data beschikbaar te stellen
     public void addOrder(Order o) {
-        orderService.addOrder(o);
+
     }
 
+    // TODO Opdracht 3: Methode implementeren (wordt gebruikt om data beschikbaar te stellen
     public void addCourier(Courier courier) {
-        userService.addCourier(courier);
     }
 
+    // TODO Opdracht 3: Methode implementeren (wordt gebruikt om data beschikbaar te stellen
     public void addCustomer(Customer customer) {
-        userService.addCustomer(customer);
+
     }
 
+    // TODO Opdracht 3: Methode implementeren (wordt gebruikt om data beschikbaar te stellen
     public void addResto(Restaurant restaurant) {
-        restoService.addResto(restaurant);
+
     }
 
+    // TODO Opdracht 3: Methode implementeren (wordt gebruikt om data beschikbaar te stellen
+    public Collection<Courier> getCouriers() {
+        return null;
+    }
 
+    // TODO Opdracht 3: Methode implementeren (wordt gebruikt in een test)
+    public int getDeliveryPointsTotal(Courier c) {
+        return 0;
+    }
+
+    // TODO Opdracht 3: Dit is DE methode die in opdracht 3 moet uitgewerkt worden comform de interactiediagrammen die ook worden uitgewerkt.
+    // TODO Opdracht 4: In opdracht 4 moet de implementatie van deze methode aangepast worden (zie beschrijving)
     public Collection<Order> getAvailableDeliveries() {
 
-        return orderService.getAvailableDeliveries(appUser);
+        return null;
     }
 
+    // TODO Opdracht 4: Deze methode moet ontworpen worden in opdracht 4. Code en diagrammen moet consistent zijn.
     public Order selectDelivery(int orderId) {
-        Order o = orderService.assignOrder(orderId, appUser);
-        userService.assignOrderAcceptedPoints(appUser);
-        appUser.setAvailable(false);
-        return o;
+        return null;
     }
 
+    // TODO Opdracht 4: Deze methode moet ontworpen worden in opdracht 4. Code en diagrammen moet consistent zijn.
     public Order registerDeliveryPickup(int orderId) {
-        Order o = orderService.registerOrderPickup(orderId);
-        if (orderService.isOnTimePickup(o)) {
-            userService.addOnTimePickupPoints(appUser);
-        } else {
-            userService.deductLatePickupPoints(appUser);
-        }
-        return o;
+        return null;
     }
 
+    // TODO Opdracht 4: Deze methode moet ontworpen worden in opdracht 4. Code en diagrammen moet consistent zijn.
     public Order registerSuccesfullDelivery(int orderId) {
-        Order o = orderService.registerDelivery(orderId);
-        if (orderService.isOnTimePickup(o)) {
-            userService.addOnTimePickupPoints(appUser);
-        } else {
-            userService.deductLatePickupPoints(appUser);
-        }
-        return o;
-        //TODO: Complete use case deliver order event registerSuccesfullDelivery
-        //Makes a new orderEvent, DeliveryPoints added, sets Courier available
+        return null;
     }
 
 

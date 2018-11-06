@@ -3,11 +3,13 @@ package be.kdg.deliDish.business.domain.restaurant;
 
 import be.kdg.deliDish.business.domain.user.Partner;
 import be.kdg.foundation.contact.Adress;
-import be.kdg.foundation.contact.Position;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
+//TODO Je mag zaken toevoegen aan deze klasse. Bestaande attributen en methodes wijzigen doe je beter niet.
 public class Restaurant implements Serializable {
     private String name;
     private Adress adres;
@@ -21,21 +23,21 @@ public class Restaurant implements Serializable {
         this.partner = partner;
     }
 
+    // Deze wijzigen maakt de testdata stuk
     public void addOpening(OpeningPeriod opening) {
         openingShedule.add(opening);
     }
 
+    // Deze wijzigen maakt de testdata stuk
     public void addDish(Dish dish) {
         dishes.add(dish);
     }
 
+    // Deze wijzigen maakt de teseten stuk
     public Dish getDish(int i) {
         return dishes.get(i);
     }
 
-    public Position getPosition() {
-        return adres.getPosition();
-    }
 
 	@Override
 	public boolean equals(Object o) {

@@ -5,6 +5,7 @@ import be.kdg.foundation.contact.ContactInfo;
 import java.io.Serializable;
 import java.util.Objects;
 
+//TODO Je mag zaken toevoegen aan deze klasse. Bestaande attributen en methodes wijzigen doe je beter niet.
 public class User implements Serializable {
     private String firstName;
     private String lastName;
@@ -34,23 +35,4 @@ public class User implements Serializable {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public ContactInfo getContactInfo() {
-        return contactInfo;
-    }
-
-    public void setContactInfo(ContactInfo contactInfo) {
-        this.contactInfo = contactInfo;
-    }
 }

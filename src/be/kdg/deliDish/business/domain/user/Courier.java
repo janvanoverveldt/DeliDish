@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+
+//TODO voeg enkel zaken toe indien nodig
 public class Courier extends User {
 
     private Position currentPosition;

@@ -1,13 +1,11 @@
 package be.kdg.foundation.contact;
 
 import java.io.Serializable;
-import java.util.logging.Logger;
 
 /**
  * @author Jan de Rijke.
  */
 public class City implements Serializable {
-    private static Logger logger = Logger.getLogger("be.kdg.foundation.contact.Gemeente");
     private final String country;
     private final String postal;
     private final String name;

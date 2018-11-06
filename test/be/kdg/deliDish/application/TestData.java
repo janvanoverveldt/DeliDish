@@ -1,6 +1,5 @@
 package be.kdg.deliDish.application;
 
-import be.kdg.deliDish.business.OrderService;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.order.OrderEvent;
 import be.kdg.deliDish.business.domain.order.OrderLine;
@@ -26,7 +25,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
+//TODO Opdracht 3: Bekijk welke testdata aangemaakt wordt en probeer te begrijpen
 /**
  * Deze klasse bevat test data.
  * Zij mag enkel gebruikt worden bij het initialiseren van het systeem,
@@ -103,11 +102,11 @@ class TestData {
      * Maakt verschillende orders aan
      */
     private void maakOrders() {
-        maakOrder(restos.get(0).getDish(0), 3, OrderState.ORDER_PLACED, "Binnen eerste vijf minuten, maar courier heeft meer dan gemiddelde deliveryPoints", 500);
-        maakOrder(restos.get(0).getDish(0), 6, OrderState.ORDER_PLACED, "Na vijf minuten", 3000);
-        maakOrder(restos.get(0).getDish(0), 3, OrderState.ORDER_PLACED, "Courier te weinig delivery points", 3000);
-        maakOrder(restos.get(0).getDish(0), 6, OrderState.COURIER_ASSIGNED, "Status verkeerd", 500);
-        maakOrder(restos.get(1).getDish(0), 6, OrderState.ORDER_PLACED, "Resto te ver", 500);
+        maakOrder(restos.get(0).getDish(0), 3, OrderState.ORDER_PLACED, "Binnen eerste vijf minuten, maar courier heeft meer dan gemiddelde deliveryPoints", 500, 1);
+        maakOrder(restos.get(0).getDish(0), 6, OrderState.ORDER_PLACED, "Na vijf minuten", 3000, 2);
+        maakOrder(restos.get(0).getDish(0), 3, OrderState.ORDER_PLACED, "Courier te weinig delivery points", 3000, 3);
+        maakOrder(restos.get(0).getDish(0), 6, OrderState.COURIER_ASSIGNED, "Status verkeerd", 500, 4);
+        maakOrder(restos.get(1).getDish(0), 6, OrderState.ORDER_PLACED, "Resto te ver", 500, 5);
 
     }
 
@@ -128,12 +127,12 @@ class TestData {
         return customer;
     }
 
-    public void maakOrder(Dish dish, long tijdGeleden, OrderState orderState, String orderTekst, int deliveryPoints) {
+    public void maakOrder(Dish dish, long tijdGeleden, OrderState orderState, String orderTekst, int deliveryPoints, int orderId) {
         OrderLine ol = new OrderLine(dish, 4, "No remark");
         List<OrderLine> ols = new ArrayList<>();
         ols.add(ol);
         OrderEvent event = new OrderEvent(LocalDateTime.now().minus(tijdGeleden, ChronoUnit.MINUTES), orderState, "");
-        Order o = new Order(ols, customer.getDeliveryAdresses().get(0), orderTekst + ": " + tijdGeleden + " min, " + orderState + ", " + deliveryPoints + " points", customer, OrderService.generateOrderId(), deliveryPoints);
+        Order o = new Order(ols, customer.getDeliveryAdresses().get(0), orderTekst + ": " + tijdGeleden + " min, " + orderState + ", " + deliveryPoints + " points", customer, orderId, deliveryPoints);
         o.addEvent(event);
         orders.add(o);
     }

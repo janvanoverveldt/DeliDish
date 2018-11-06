@@ -15,7 +15,4 @@ public class OrderLine implements Serializable {
         this.remark = remark;
     }
 
-    public Dish getDish() {
-        return dish;
-    }
 }

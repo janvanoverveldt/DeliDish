@@ -5,7 +5,6 @@ import be.kdg.deliDish.business.domain.user.Customer;
 import be.kdg.foundation.contact.Adress;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -34,36 +33,14 @@ public class Order implements Serializable {
         this.averageCourierDeliveryPoints = averageDeliveryPoints;
     }
 
-    public int getAverageCourierDeliveryPoints() {
-        return averageCourierDeliveryPoints;
-    }
 
-    public void setEvents(List<OrderEvent> events) {
-        this.events = events;
-    }
 
     public Courier getDeliverer() {
         return deliverer;
     }
 
-    public void setDeliverer(Courier deliverer) {
-        this.deliverer = deliverer;
-    }
-
     public OrderState getCurrentState() {
         return events.get(events.size() - 1).getOrderState();
-    }
-
-    public LocalDateTime getOrderPlacedDateTime() {
-        return events.get(0).getTimestamp();
-    }
-
-    public Adress getDeliveryAdress() {
-        return deliveryAdress;
-    }
-
-    public List<OrderLine> getOrderlines() {
-        return orderlines;
     }
 
     public void addEvent(OrderEvent e) {

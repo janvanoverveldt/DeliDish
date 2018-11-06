@@ -3,6 +3,7 @@ package be.kdg.deliDish.business.domain.restaurant;
 import java.io.Serializable;
 import java.util.List;
 
+//TODO Je mag zaken toevoegen aan deze klasse. Bestaande attributen en methodes wijzigen doe je beter niet.
 public class Dish implements Serializable {
     private String name;
     private String description;
@@ -23,11 +24,4 @@ public class Dish implements Serializable {
         this.restaurant.addDish(this);
     }
 
-    public Restaurant getResto() {
-        return restaurant;
-    }
-
-    public int getProductionTime() {
-        return productionTime;
-    }
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
-
+//TODO Je mag zaken toevoegen aan deze klasse. Bestaande attributen en methodes wijzigen doe je beter niet.
 public class OpeningPeriod implements Serializable {
     private DayOfWeek weekday;
     private LocalTime opening;

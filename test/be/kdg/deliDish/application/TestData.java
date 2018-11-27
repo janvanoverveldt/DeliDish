@@ -25,7 +25,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-//TODO Opdracht 3: Bekijk welke testdata aangemaakt wordt en probeer te begrijpen
+//TODO (Week 3-4) Bekijk welke testdata aangemaakt wordt en probeer te begrijpen
 /**
  * Deze klasse bevat test data.
  * Zij mag enkel gebruikt worden bij het initialiseren van het systeem,

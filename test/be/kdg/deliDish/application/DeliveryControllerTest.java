@@ -27,11 +27,11 @@ public class DeliveryControllerTest {
     @BeforeEach
     public void setUp() {
         TestData data = new TestData();
-        //TODO Opdracht 3: Maak een instantie ctrl aan en initiëer alles wat nodig is om je applicatie uit te voeren.
+        //TODO (week 3-4) Maak een instantie ctrl aan en initiëer alles wat nodig is om je applicatie uit te voeren.
 
 
-        //TODO Opdracht 3: Laat onderstaande for-loops staan. Hier wordt de testdata doorgegeven aan de controller. Zorg er voor dat de data wordt opgeslagen op een logische plaats in de businesslaag.
-        //TODO Opdracht 4: De data moet in afzonderlijke laag worden opgeslagen.
+        //TODO (week 3-4) Laat onderstaande for-loops staan. Hier wordt de testdata doorgegeven aan de controller. Zorg er voor dat de data wordt opgeslagen op een logische plaats in de businesslaag.
+        //TODO (week 4-5) De data moet in afzonderlijke laag worden opgeslagen .
         for (Courier courier : data.getCouriers()) {
             ctrl.addCourier(courier);
         }
@@ -51,14 +51,14 @@ public class DeliveryControllerTest {
     @Test
     void getAvailableDeliveries() {
 
-        //TODO Opdracht 3: Zorg ervoor dat volgende test op groen komt als je deze uitvoert.
+        //TODO (Week 3-4) Zorg ervoor dat volgende test op groen komt als je deze uitvoert.
         //Voor de courier uit de US wordt de default selector gebruikt en zijn daarom alle leverbare orders beschikbaar.
         ctrl.setAppUser(ctrl.getCouriers().stream().filter(u -> u.getFirstName().equals("Frats")).findFirst().get());
         Collection<Order> availableDeliveries2 = ctrl.getAvailableDeliveries();
         assertEquals(4, availableDeliveries2.size(), "4 orders voldoen aan de voorwaarden");
 
-        //TODO Opdracht 4: Uncomment onderstaande test voor Belgische couriers.
-        //Er zijn verschillende types van beschikbare orders. Twee zijn er beschikbaar. De reden waarom wel en waarom niet staat in de DeliveryInstructions van de testdata.
+        //TODO (Week 4-5) Uncomment onderstaande test voor Belgische couriers.
+        //Er zijn verschillende types van beschikbare orders. Twee zijn er beschikbaar. De reden waarom wel en waarom niet staat in de DeliveryInstructions van de testdata. Pas voor deze alternatieve filterlogica de daarvoor logische SOLID patronen toe.
 
         Collection<Order> availableDeliveries = ctrl.getAvailableDeliveries();
         assertEquals(2, availableDeliveries.size(), "Slechts 2 orders voldoen aan de voorwaarden");
@@ -69,7 +69,7 @@ public class DeliveryControllerTest {
     }
 
 
-    //TODO Opdracht 4: uncomment test selectDelivery
+    //TODO (Week 4-5) uncomment test selectDelivery
     @Test
     void selectDelivery() {
         int orderID = ctrl.getAvailableDeliveries().stream().findFirst().get().getOrderID();
@@ -79,7 +79,7 @@ public class DeliveryControllerTest {
         assertEquals(selectedOrder.getCurrentState(), OrderState.COURIER_ASSIGNED);
     }
 
-    //TODO Opdracht 4: uncomment test registerDeliveryPickup en registerSuccesfullDelivery
+    //TODO (Week 4-5): uncomment test registerDeliveryPickup en registerSuccesfullDelivery
     @Test
     void registerDeliveryPickup() {
         int orderID = ctrl.getAvailableDeliveries().stream().findFirst().get().getOrderID();

@@ -59,24 +59,24 @@ public class DeliveryController {
         return 0;
     }
 
-    // TODO (Week 3-4): Dit is DE methode die in opdracht 3 moet uitgewerkt worden comform de interactiediagrammen die ook worden uitgewerkt.
-    // TODO (Week 4-5): In opdracht 4 moet de implementatie van deze methode aangepast worden (zie beschrijving)
+    // TODO (Week 3-4): Dit is DE methode die in bij de eerste oplevering moest uitgewerkt worden comform de interactiediagrammen die ook worden uitgewerkt.
+    // TODO (Week 4-5): In de definitieve  moet de implementatie van deze methode aangepast worden (zie beschrijving)
     public Collection<Order> getAvailableDeliveries() {
 
         return null;
     }
 
-    // TODO (Week 4-5): Deze methode moet ontworpen worden in opdracht 4. Code en diagrammen moet consistent zijn.
+    // TODO (Week 4-5): Deze methode moet ontworpen worden voor de de definitieve oplevering. Code en diagrammen moet consistent zijn.
     public Order selectDelivery(int orderId) {
         return null;
     }
 
-    // TODO (Week 4-5): Optioneel: Deze methode kan ontworpen worden in opdracht 4.
+    // TODO (Week 4-5): Optioneel: Deze methode kan ontworpen worden voor de definitieve oplevering.
     public Order registerDeliveryPickup(int orderId) {
         return null;
     }
 
-    // TODO (Week 4-5): Optioneel: Deze methode kan ontworpen worden in opdracht 4.
+    // TODO (Week 4-5): Optioneel: Deze methode kan ontworpen worden voor de definitieve oplevering.
     public Order registerSuccesfullDelivery(int orderId) {
         return null;
     }

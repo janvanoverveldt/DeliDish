@@ -11,11 +11,21 @@ import java.util.Collection;
 /**
  * @author Jan Van Overveldt.
  */
-// Dit is de controllerklasse van  Delidish. Je dient geen UI laag te implementeren. De methoden van de controller worden vanuit DeliveryControllerTest aangeroepen.
+// Dit is de controllerklasse van  Delidish. Je dient geen UI laag te implementeren. De methoden van de controller worden vanuit DeliveryControllerTest aangeroepen. Attributen mag je toevoegen indien dit nodig is voor een correct ontwerp.
+
 public class DeliveryController {
+
     //Session Info
     private Courier appUser;
 
+
+
+
+
+        /*
+    DE METHODEN HIERONDER ZIJN NODIG VOOR DE INITIALISATIE VAN HET SYSTEEM.
+    #######################################################################
+     */
 
     public Courier getAppUser() {
         return appUser;
@@ -46,7 +56,6 @@ public class DeliveryController {
 
     // TODO (Week 3-4): Methode implementeren (wordt gebruikt om data beschikbaar te stellen)
     public void addResto(Restaurant restaurant) {
-
     }
 
     // TODO (Week 3-4): Methode implementeren (wordt gebruikt om data beschikbaar te stellen
@@ -59,10 +68,22 @@ public class DeliveryController {
         return 0;
     }
 
+           /*
+    (EINDE INITIALISATIEMETHODEN)
+    #####################################################################################################
+     */
+
+
+
+
+        /*
+    DE METHODEN HIERONDER ZIJN DEGENE DIE JE UIT DIENT TE WERKEN VOOR HET PROJECT (ZIE SSD EN CONTRACTEN).
+    #####################################################################################################
+     */
+
     // TODO (Week 3-4): Dit is DE methode die in bij de eerste oplevering moest uitgewerkt worden comform de interactiediagrammen die ook worden uitgewerkt.
     // TODO (Week 4-5): In de definitieve  moet de implementatie van deze methode aangepast worden (zie beschrijving)
     public Collection<Order> getAvailableDeliveries() {
-
         return null;
     }
 
@@ -70,6 +91,14 @@ public class DeliveryController {
     public Order selectDelivery(int orderId) {
         return null;
     }
+               /*
+    (EINDE UIT TE WERKEN METHODEn)
+    #####################################################################################################
+     */
+
+            /*
+    DE METHODEN HIERONDER KAN JE OPTIONEEL NOG UITWERKEN.
+    ######################################################
 
     // TODO (Week 4-5): Optioneel: Deze methode kan ontworpen worden voor de definitieve oplevering.
     public Order registerDeliveryPickup(int orderId) {
@@ -80,7 +109,7 @@ public class DeliveryController {
     public Order registerSuccesfullDelivery(int orderId) {
         return null;
     }
-
+*/
 
 
 }

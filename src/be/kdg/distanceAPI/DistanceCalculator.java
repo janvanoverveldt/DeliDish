@@ -13,7 +13,7 @@ public class DistanceCalculator {
 
 
     /**
-     * Returns the distance between two points.
+     * Returns the distance in km between two points.
      *
      * @param point1
      * @param point2

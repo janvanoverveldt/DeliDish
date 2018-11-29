@@ -23,17 +23,17 @@ public class Restaurant implements Serializable {
         this.partner = partner;
     }
 
-    // Deze wijzigen maakt de testdata stuk
+
     public void addOpening(OpeningPeriod opening) {
         openingShedule.add(opening);
     }
 
-    // Deze wijzigen maakt de testdata stuk
+
     public void addDish(Dish dish) {
         dishes.add(dish);
     }
 
-    // Deze wijzigen maakt de teseten stuk
+
     public Dish getDish(int i) {
         return dishes.get(i);
     }

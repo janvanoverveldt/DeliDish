@@ -77,7 +77,7 @@ public class DeliveryControllerTest {
         assertEquals(selectedOrder.getCurrentState(), OrderState.COURIER_ASSIGNED);
     }*/
 
-    //TODO (Week 4-5): uncomment test registerDeliveryPickup en registerSuccesfullDelivery
+    //TODO (Week 4-5): De volgende twee methoden kunnen optioneel worden uitgewerkt:  uncomment test registerDeliveryPickup en registerSuccesfullDelivery
   /*  @Test
     void registerDeliveryPickup() {
         int orderID = ctrl.getAvailableDeliveries().stream().findFirst().get().getOrderID();

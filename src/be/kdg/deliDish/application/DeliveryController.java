@@ -71,12 +71,12 @@ public class DeliveryController {
         return null;
     }
 
-    // TODO (Week 4-5): Deze methode moet ontworpen worden in opdracht 4. Code en diagrammen moet consistent zijn.
+    // TODO (Week 4-5): Optioneel: Deze methode kan ontworpen worden in opdracht 4.
     public Order registerDeliveryPickup(int orderId) {
         return null;
     }
 
-    // TODO (Week 4-5): Deze methode moet ontworpen worden in opdracht 4. Code en diagrammen moet consistent zijn.
+    // TODO (Week 4-5): Optioneel: Deze methode kan ontworpen worden in opdracht 4.
     public Order registerSuccesfullDelivery(int orderId) {
         return null;
     }

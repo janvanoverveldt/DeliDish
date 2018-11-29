@@ -11,7 +11,7 @@ import java.util.Collection;
 /**
  * @author Jan Van Overveldt.
  */
-// Dit is de controllerklasse van het BackOffice subsysteem
+// Dit is de controllerklasse van  Delidish. Je dient geen UI laag te implementeren. De methoden van de controller worden vanuit DeliveryControllerTest aangeroepen.
 public class DeliveryController {
     //Session Info
     private Courier appUser;

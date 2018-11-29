@@ -11,10 +11,8 @@ import java.util.Collection;
 /**
  * @author Jan Van Overveldt.
  */
-// Dit is de controllerklasse van  Delidish. Je dient geen UI laag te implementeren. De methoden van de controller worden vanuit DeliveryControllerTest aangeroepen. Attributen mag je toevoegen indien dit nodig is voor een correct ontwerp.
-
+// Dit is de controllerklasse van  Delidish. Je dient geen UI laag te implementeren. De methoden van de controller worden vanuit DeliveryControllerTest aangeroepen.
 public class DeliveryController {
-
     //Session Info
     private Courier appUser;
 
@@ -56,6 +54,7 @@ public class DeliveryController {
 
     // TODO (Week 3-4): Methode implementeren (wordt gebruikt om data beschikbaar te stellen)
     public void addResto(Restaurant restaurant) {
+
     }
 
     // TODO (Week 3-4): Methode implementeren (wordt gebruikt om data beschikbaar te stellen
@@ -84,6 +83,7 @@ public class DeliveryController {
     // TODO (Week 3-4): Dit is DE methode die in bij de eerste oplevering moest uitgewerkt worden comform de interactiediagrammen die ook worden uitgewerkt.
     // TODO (Week 4-5): In de definitieve  moet de implementatie van deze methode aangepast worden (zie beschrijving)
     public Collection<Order> getAvailableDeliveries() {
+
         return null;
     }
 

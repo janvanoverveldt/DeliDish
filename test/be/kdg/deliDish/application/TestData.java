@@ -13,10 +13,7 @@ import be.kdg.deliDish.business.domain.user.Courier;
 import be.kdg.deliDish.business.domain.user.Customer;
 import be.kdg.deliDish.business.domain.user.DeliveryPointEvent;
 import be.kdg.deliDish.business.domain.user.Partner;
-import be.kdg.foundation.contact.Adress;
-import be.kdg.foundation.contact.City;
-import be.kdg.foundation.contact.ContactInfo;
-import be.kdg.foundation.contact.Position;
+import be.kdg.foundation.contact.*;
 import be.kdg.foundation.financial.RekeningNummer;
 
 import java.time.DayOfWeek;
@@ -26,6 +23,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static be.kdg.foundation.contact.Country.*;
 
 /**
  * Deze klasse bevat test data.
@@ -62,16 +61,16 @@ class TestData {
      * Maakt de Antwerpse districten aan om alles te testen
      */
     private void makeCitys() {
-        cities.add(new City("2000", "Antwerpen", "Belgium"));
-        cities.add(new City("2600", "Berchem", "Belgium"));
-        cities.add(new City("2040", "BerendrechtZandvlietLillo", "Belgium"));
-        cities.add(new City("2140", "Borgerhout", "Belgium"));
-        cities.add(new City("2100", "Deurne", "Belgium"));
-        cities.add(new City("2180", "Ekeren", "Belgium"));
-        cities.add(new City("2660", "Hoboken", "Belgium"));
-        cities.add(new City("2170", "Merksem", "Belgium"));
-        cities.add(new City("2610", "Wilrijk", "Belgium"));
-        cities.add(new City("90210", "Beverly Hills", "United States"));
+        cities.add(new City("2000", "Antwerpen", BELGIUM));
+        cities.add(new City("2600", "Berchem", BELGIUM));
+        cities.add(new City("2040", "BerendrechtZandvlietLillo", BELGIUM));
+        cities.add(new City("2140", "Borgerhout", BELGIUM));
+        cities.add(new City("2100", "Deurne", BELGIUM));
+        cities.add(new City("2180", "Ekeren", BELGIUM));
+        cities.add(new City("2660", "Hoboken", BELGIUM));
+        cities.add(new City("2170", "Merksem", BELGIUM));
+        cities.add(new City("2610", "Wilrijk", BELGIUM));
+        cities.add(new City("90210", "Beverly Hills", UNITED_STATES));
     }
     private void makeRestaurants() {
         maakResto("Resto dat niet zo ver af is", new Position(51.210150, 4.397607));

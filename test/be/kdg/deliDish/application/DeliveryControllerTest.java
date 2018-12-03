@@ -3,7 +3,7 @@ package be.kdg.deliDish.application;
 import be.kdg.deliDish.business.OrderService;
 import be.kdg.deliDish.business.RestoService;
 import be.kdg.deliDish.business.UserService;
-import be.kdg.deliDish.business.delivery.BelgianAvailableDeliveriesSelector;
+import be.kdg.deliDish.business.delivery.*;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.order.OrderState;
 import be.kdg.deliDish.business.domain.restaurant.Restaurant;
@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 
+import static be.kdg.deliDish.business.delivery.AvailableDeliveriesSelectorFactory.*;
+import static be.kdg.foundation.contact.Country.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -39,7 +41,10 @@ public class DeliveryControllerTest {
         ctrl = new DeliveryController(os, us, rs);
         ctrl.setAppUser(data.getCouriers().get(0));
         // Add the specialised Delevery selector. The default selector is created in de orderService itself.
-        os.addAvailableDeliveriesSelector("Belgium", new BelgianAvailableDeliveriesSelector(us, os));
+	    addAvailableDeliveriesSelector(
+		    DEFAULT, new DefaultAvailableDeliveriesSelector( os));
+	    addAvailableDeliveriesSelector(
+		    BELGIUM, new BelgianAvailableDeliveriesSelector(us, os));
 
         //Load testdata into repositories
         for (Courier courier : data.getCouriers()) {

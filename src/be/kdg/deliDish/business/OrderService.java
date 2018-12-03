@@ -1,7 +1,6 @@
 package be.kdg.deliDish.business;
 
-import be.kdg.deliDish.business.delivery.AvailableDeliveriesSelector;
-import be.kdg.deliDish.business.delivery.DefaultAvailableDeliveriesSelector;
+import be.kdg.deliDish.business.delivery.*;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.order.OrderEvent;
 import be.kdg.deliDish.business.domain.order.OrderLine;
@@ -17,12 +16,8 @@ import java.util.*;
 public class OrderService {
     private static int orerIdSequence = 0;
     private final MemoryRepository<Integer,Order> orderRepo = new MemoryRepository<>();
-    private Map<String, AvailableDeliveriesSelector> availableDeliverieSelectors;
 
-    public OrderService() {
-        availableDeliverieSelectors = new HashMap<>();
-        availableDeliverieSelectors.put("Default", new DefaultAvailableDeliveriesSelector(this));
-    }
+
 
     /**
      * Sequence for OrderIds
@@ -33,9 +28,7 @@ public class OrderService {
         return orerIdSequence++;
     }
 
-    public void addAvailableDeliveriesSelector(String country, AvailableDeliveriesSelector ads) {
-        availableDeliverieSelectors.put(country, ads);
-    }
+
 
     /**
      * Returns deliveries that a specific courier can deliver. The selectionalgorithm depends on the country of the courier demanding the available deliveries.
@@ -44,11 +37,8 @@ public class OrderService {
      * @return
      */
     public Collection<Order> getAvailableDeliveries(Courier courier) {
-        AvailableDeliveriesSelector ads = availableDeliverieSelectors.get(courier.getContactInfo().getAdress().getCity().getCountry());
-        if (ads == null) {
-            ads = availableDeliverieSelectors.get("Default");
-        }
-        return ads.getAvailableDeliveries(courier);
+        return AvailableDeliveriesSelectorFactory.getAvailableDeliveriesSelector(courier.getContactInfo().getAdress().getCity().getCountry())
+	        .getAvailableDeliveries(courier);
     }
 
     public void addOrder(Order order) {

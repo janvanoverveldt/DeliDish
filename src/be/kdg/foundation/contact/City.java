@@ -8,19 +8,19 @@ import java.util.logging.Logger;
  */
 public class City implements Serializable {
     private static Logger logger = Logger.getLogger("be.kdg.foundation.contact.Gemeente");
-    private final String country;
+    private final Country country;
     private final String postal;
     private final String name;
 
 
 
-    public City(String postal, String name, String country) {
+    public City(String postal, String name, Country country) {
         this.postal = postal;
         this.name = name;
         this.country = country;
     }
 
-    public String getCountry() {
+    public Country getCountry() {
         return country;
     }
 }

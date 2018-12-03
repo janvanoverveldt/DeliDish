@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 
-import static be.kdg.deliDish.business.delivery.AvailableDeliveriesSelectorFactory.*;
+import static be.kdg.deliDish.business.delivery.AvailableDeliveriesStrategy.*;
 import static be.kdg.foundation.contact.Country.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

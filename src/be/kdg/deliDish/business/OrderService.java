@@ -37,8 +37,7 @@ public class OrderService {
      * @return
      */
     public Collection<Order> getAvailableDeliveries(Courier courier) {
-        return AvailableDeliveriesSelectorFactory.getAvailableDeliveriesSelector(courier.getContactInfo().getAdress().getCity().getCountry())
-	        .getAvailableDeliveries(courier);
+        return AvailableDeliveriesStrategy.getAvailableDeliveries(courier);
     }
 
     public void addOrder(Order order) {

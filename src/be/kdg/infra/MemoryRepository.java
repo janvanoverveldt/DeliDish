@@ -2,6 +2,7 @@ package be.kdg.infra;
 
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -16,7 +17,7 @@ import java.util.stream.Stream;
  */
 public class MemoryRepository<K,V extends Serializable> implements Repository<K,V > {
 
-	private Map<K, byte[]> data = new HashMap<>();
+	private Map<K, byte[]> data = new ConcurrentHashMap<>();
 
 
 	@Override

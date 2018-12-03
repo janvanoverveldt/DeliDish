@@ -8,22 +8,22 @@ import be.kdg.infra.MemoryRepository;
 import java.util.Collection;
 
 public class UserService {
-    private final MemoryRepository<Customer> customerRepo = new MemoryRepository<>();
-    private final MemoryRepository<Courier> courierRepo = new MemoryRepository<>();
+    private final MemoryRepository<String,Customer> customerRepo = new MemoryRepository<>();
+    private final MemoryRepository<String,Courier> courierRepo = new MemoryRepository<>();
     private static int ORDER_ACCEPTED_POINTS = 5;
     private static int ORDER_PICKUP_ONTIME_POINTS = 5;
     private static int ORDER_PICKUP_LATE_POINTS = -5;
 
     public void addCustomer(Customer customer) {
-        customerRepo.put(customer);
+        customerRepo.put(customer.getEmail(),customer);
     }
 
     public Collection<Customer> getCustomers() {
         return customerRepo.entities();
     }
 
-    public void addCourier(Courier Courier) {
-        courierRepo.put(Courier);
+    public void addCourier(Courier courier) {
+        courierRepo.put(courier.getEmail(),courier);
     }
 
 

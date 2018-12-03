@@ -16,7 +16,7 @@ import java.util.*;
 
 public class OrderService {
     private static int orerIdSequence = 0;
-    private final MemoryRepository<Order> orderRepo = new MemoryRepository<>();
+    private final MemoryRepository<Integer,Order> orderRepo = new MemoryRepository<>();
     private Map<String, AvailableDeliveriesSelector> availableDeliverieSelectors;
 
     public OrderService() {
@@ -52,7 +52,7 @@ public class OrderService {
     }
 
     public void addOrder(Order order) {
-        orderRepo.put(order);
+        orderRepo.put(order.getOrderID(),order);
     }
 
 
@@ -117,7 +117,7 @@ public class OrderService {
     private Order registerOrderEvent(int orderId, OrderState state, String remark) {
         Order o = getOrder(orderId);
         o.addEvent(new OrderEvent(state, remark));
-        orderRepo.update(o);
+        orderRepo.update(orderId,o);
         return o;
     }
 }

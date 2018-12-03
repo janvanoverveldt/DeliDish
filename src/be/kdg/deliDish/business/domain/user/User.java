@@ -53,4 +53,8 @@ public class User implements Serializable {
     public void setContactInfo(ContactInfo contactInfo) {
         this.contactInfo = contactInfo;
     }
+
+	public String getEmail(){
+		return getContactInfo().getEmail();
+	}
 }

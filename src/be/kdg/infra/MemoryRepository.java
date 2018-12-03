@@ -14,9 +14,9 @@ import java.util.stream.Stream;
  * Objects in the repo are not automagically updated after manipulating an object in de bussinesslayer.
  * Therefore you are obligated to always persist changes after an update.
  */
-public class MemoryRepository<V extends Serializable> implements Repository<V > {
+public class MemoryRepository<K,V extends Serializable> implements Repository<K,V > {
 
-	private Map<Integer, byte[]> data = new HashMap<>();
+	private Map<K, byte[]> data = new HashMap<>();
 
 
 	@Override
@@ -24,11 +24,11 @@ public class MemoryRepository<V extends Serializable> implements Repository<V > 
 		return asStream().collect(Collectors.toSet());
 	}
 
-	public boolean put(V value) {
-		if (value == null) {
+	public boolean put(K key,V value) {
+		if (key == null) {
 			return false;
 		}
-		return data.put(getKey(value), marshall( value)) != null;
+		return data.put(key, marshall( value)) != null;
 	}
 
 	private byte[] marshall(Serializable entity) {
@@ -53,18 +53,14 @@ public class MemoryRepository<V extends Serializable> implements Repository<V > 
 		}
 	}
 
-	private int getKey(Object entity) {
-		return entity.hashCode();
-	}
-
 	/**
 	 * Just a wrapper around addContract for update semantics
 	 *
 	 * @param entity entity to be updated
 	 */
 	@Override
-	public void update(V entity) {
-		put(entity);
+	public void update(K key,V entity) {
+		put(key,entity);
 	}
 
 	/**
@@ -100,12 +96,12 @@ public class MemoryRepository<V extends Serializable> implements Repository<V > 
 	}
 
 	/**
-	 * @param entity entity die we uit de dB willen restoren
+	 * @param key van entity die we uit de dB willen restoren
 	 * @return the entity as in the repo or null
 	 * For efficiency reasons the store would better be implemented as a Map
 	 */
 	@Override
-	public V get(V entity) {
-		return unmarshall(data.get(getKey(entity) ));
+	public V get(K key) {
+		return unmarshall(data.get(key ));
 	}
 }

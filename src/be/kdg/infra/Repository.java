@@ -8,13 +8,13 @@ import java.util.function.Predicate;
 /**
  * Created by jan on 3/12/2016.
  */
-public interface Repository<V > {
+public interface Repository<K,V > {
 
     Collection<V> entities();
 
-    boolean put(V value);
+    boolean put(K key,V value);
 
-    void update(V value);
+    void update(K key,V value);
 
     Collection<V> findWhere(Predicate<V> predicate);
 
@@ -27,5 +27,5 @@ public interface Repository<V > {
      */
     V findOneWhere(Predicate<V> predicate);
 
-    V get(V entity);
+    V get(K key);
 }

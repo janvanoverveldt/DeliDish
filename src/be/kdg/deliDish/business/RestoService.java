@@ -6,10 +6,10 @@ import be.kdg.infra.MemoryRepository;
 import java.util.Collection;
 
 public class RestoService {
-    private final MemoryRepository<Restaurant> restoRepo = new MemoryRepository<>();
+    private final MemoryRepository<String,Restaurant> restoRepo = new MemoryRepository<>();
 
     public void addResto(Restaurant resto) {
-        restoRepo.put(resto);
+        restoRepo.put(resto.getName(),resto);
     }
 
     public Collection<Restaurant> getRestos() {

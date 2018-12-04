@@ -11,28 +11,26 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AvailableDeliveriesStrategy {
 
 
-	private static Map<Country, AvailableDeliveriesSelector> availableDeliverieSelectors=new ConcurrentHashMap<>();
+	private final Map<Country, AvailableDeliveriesSelector> availableDeliverieSelectors=new ConcurrentHashMap<>();
 
 
-private static AvailableDeliveriesSelector getAvailableDeliveriesSelector(Country country){
+private  AvailableDeliveriesSelector getAvailableDeliveriesSelector(Country country){
 	final AvailableDeliveriesSelector selector = availableDeliverieSelectors.get(
 		country);
 	return selector!=null?selector:getAvailableDeliveriesSelector();
 }
-	private static AvailableDeliveriesSelector getAvailableDeliveriesSelector(){
+	private  AvailableDeliveriesSelector getAvailableDeliveriesSelector(){
 		return availableDeliverieSelectors.get(Country.DEFAULT);
 	}
 
 	//
 
-	private AvailableDeliveriesStrategy() {
-	}
 
-	public static void addAvailableDeliveriesSelector(Country country, AvailableDeliveriesSelector ads) {
+	public  void addAvailableDeliveriesSelector(Country country, AvailableDeliveriesSelector ads) {
 		availableDeliverieSelectors.put(country, ads);
 	}
 
-	public static Collection<Order> getAvailableDeliveries(Courier courier) {
+	public  Collection<Order> getAvailableDeliveries(Courier courier) {
 		return getAvailableDeliveriesSelector(courier.getContactInfo().getAdress().getCity().getCountry())
 			.getAvailableDeliveries(courier);
 	}

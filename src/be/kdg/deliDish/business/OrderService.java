@@ -16,10 +16,10 @@ import java.util.*;
 public class OrderService {
     private static int orerIdSequence = 0;
     private final MemoryRepository<Integer,Order> orderRepo = new MemoryRepository<>();
+	private  AvailableDeliveriesStrategy deliveryStrategy;
 
 
-
-    /**
+	/**
      * Sequence for OrderIds
      *
      * @return newly generated orderId
@@ -37,7 +37,7 @@ public class OrderService {
      * @return
      */
     public Collection<Order> getAvailableDeliveries(Courier courier) {
-        return AvailableDeliveriesStrategy.getAvailableDeliveries(courier);
+        return deliveryStrategy.getAvailableDeliveries(courier);
     }
 
     public void addOrder(Order order) {
@@ -109,4 +109,9 @@ public class OrderService {
         orderRepo.update(orderId,o);
         return o;
     }
+
+	public void setAvailableDeliveriesStrategy(AvailableDeliveriesStrategy strategy) {
+		deliveryStrategy=strategy;
+
+	}
 }

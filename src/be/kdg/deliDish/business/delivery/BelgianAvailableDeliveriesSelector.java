@@ -1,9 +1,9 @@
 package be.kdg.deliDish.business.delivery;
 
-import be.kdg.deliDish.business.OrderService;
-import be.kdg.deliDish.business.UserService;
+import be.kdg.deliDish.business.service.OrderService;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.user.Courier;
+import be.kdg.deliDish.business.service.UserService;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -16,8 +16,9 @@ public class BelgianAvailableDeliveriesSelector implements AvailableDeliveriesSe
     private OrderService os;
 
     public BelgianAvailableDeliveriesSelector(UserService us, OrderService os) {
-        this.us = us;
-        this.os = os;
+    	this.us =us;
+    	this.os=os;
+
     }
 
 

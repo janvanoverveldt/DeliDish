@@ -1,9 +1,8 @@
 package be.kdg.deliDish.application;
 
-import be.kdg.deliDish.business.OrderService;
-import be.kdg.deliDish.business.RestoService;
-import be.kdg.deliDish.business.UserService;
+
 import be.kdg.deliDish.business.delivery.*;
+import be.kdg.deliDish.business.service.*;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.order.OrderState;
 import be.kdg.deliDish.business.domain.restaurant.Restaurant;
@@ -13,8 +12,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 
-import static be.kdg.deliDish.business.delivery.AvailableDeliveriesStrategy.*;
-import static be.kdg.foundation.contact.Country.*;
+import static be.kdg.foundation.contact.Country.BELGIUM;
+import static be.kdg.foundation.contact.Country.DEFAULT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

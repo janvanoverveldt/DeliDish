@@ -1,4 +1,4 @@
-package be.kdg.infra;
+package be.kdg.persistence;
 
 import java.io.*;
 import java.util.*;

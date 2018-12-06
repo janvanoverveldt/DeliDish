@@ -1,9 +1,9 @@
-package be.kdg.deliDish.business;
+package be.kdg.deliDish.business.service;
 
 import be.kdg.deliDish.business.domain.user.Courier;
 import be.kdg.deliDish.business.domain.user.Customer;
 import be.kdg.deliDish.business.domain.user.DeliveryPointEvent;
-import be.kdg.infra.MemoryRepository;
+import be.kdg.persistence.MemoryRepository;
 
 import java.util.Collection;
 

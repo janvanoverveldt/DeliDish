@@ -1,6 +1,6 @@
 package be.kdg.deliDish.application;
 
-import be.kdg.deliDish.business.OrderService;
+import be.kdg.deliDish.business.service.OrderService;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.order.OrderEvent;
 import be.kdg.deliDish.business.domain.order.OrderLine;

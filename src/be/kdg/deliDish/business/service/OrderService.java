@@ -1,4 +1,4 @@
-package be.kdg.deliDish.business;
+package be.kdg.deliDish.business.service;
 
 import be.kdg.deliDish.business.delivery.*;
 import be.kdg.deliDish.business.domain.order.Order;
@@ -8,7 +8,7 @@ import be.kdg.deliDish.business.domain.order.OrderState;
 import be.kdg.deliDish.business.domain.restaurant.Restaurant;
 import be.kdg.deliDish.business.domain.user.Courier;
 import be.kdg.foundation.contact.Position;
-import be.kdg.infra.MemoryRepository;
+import be.kdg.persistence.MemoryRepository;
 
 import java.time.LocalDateTime;
 import java.util.*;

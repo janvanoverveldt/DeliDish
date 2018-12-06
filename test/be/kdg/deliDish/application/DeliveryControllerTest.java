@@ -79,9 +79,9 @@ public class DeliveryControllerTest {
     void selectDelivery() {
         int orderID = ctrl.getAvailableDeliveries().stream().findFirst().get().getOrderID();
         Order selectedOrder = ctrl.selectDelivery(orderID);
-        assertEquals(selectedOrder.getDeliverer(), ctrl.getAppUser());
-        assertEquals(us.getDeliveryPointsTotal(ctrl.getAppUser()), 501 + 5);
-        assertEquals(selectedOrder.getCurrentState(), OrderState.COURIER_ASSIGNED);
+        assertEquals(ctrl.getAppUser(),selectedOrder.getDeliverer() );
+        assertEquals(501 + 5,us.getDeliveryPointsTotal(ctrl.getAppUser()));
+        assertEquals(OrderState.COURIER_ASSIGNED,selectedOrder.getCurrentState() );
 
 
     }

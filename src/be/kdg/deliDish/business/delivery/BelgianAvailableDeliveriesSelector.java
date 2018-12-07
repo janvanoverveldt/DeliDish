@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class BelgianAvailableDeliveriesSelector implements AvailableDeliveriesSelector {
+public class BelgianAvailableDeliveriesSelector implements DeliveriesFilter {
     private UserService us;
     private OrderService os;
 

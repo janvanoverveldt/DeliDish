@@ -5,7 +5,7 @@ import be.kdg.deliDish.business.domain.user.Courier;
 
 import java.util.Collection;
 
-public interface AvailableDeliveriesSelector {
+public interface DeliveriesFilter {
 
     Collection<Order> getAvailableDeliveries(Courier courier);
 }

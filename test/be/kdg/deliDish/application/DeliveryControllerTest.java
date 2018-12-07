@@ -40,9 +40,9 @@ public class DeliveryControllerTest {
         ctrl = new DeliveryController(os, us, rs);
         ctrl.setAppUser(data.getCouriers().get(0));
         // Add the specialised Delevery selector. The default selector is created in de orderService itself.
-	    AvailableDeliveriesStrategy deliveryStrategy = new AvailableDeliveriesStrategy();
-	    deliveryStrategy.addAvailableDeliveriesSelector(DEFAULT, new DefaultAvailableDeliveriesSelector( os));
-	    deliveryStrategy.addAvailableDeliveriesSelector(BELGIUM, new BelgianAvailableDeliveriesSelector(us, os));
+	    DeliveriesFilterSelector deliveryStrategy = new DeliveriesFilterSelector();
+	    deliveryStrategy.addDeliveriesFilter(DEFAULT, new DefaultAvailableDeliveriesSelector( os));
+	    deliveryStrategy.addDeliveriesFilter(BELGIUM, new BelgianAvailableDeliveriesSelector(us, os));
 			os.setAvailableDeliveriesStrategy(deliveryStrategy);
         //Load testdata into repositories
         for (Courier courier : data.getCouriers()) {
@@ -80,7 +80,7 @@ public class DeliveryControllerTest {
         int orderID = ctrl.getAvailableDeliveries().stream().findFirst().get().getOrderID();
         Order selectedOrder = ctrl.selectDelivery(orderID);
         assertEquals(ctrl.getAppUser(),selectedOrder.getDeliverer() );
-        assertEquals(501 + 5,us.getDeliveryPointsTotal(ctrl.getAppUser()));
+        assertEquals(501+5 ,us.getDeliveryPointsTotal(ctrl.getAppUser()));
         assertEquals(OrderState.COURIER_ASSIGNED,selectedOrder.getCurrentState() );
 
 

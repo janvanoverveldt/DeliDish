@@ -16,7 +16,7 @@ import java.util.*;
 public class OrderService {
     private static int orerIdSequence = 0;
     private final MemoryRepository<Integer,Order> orderRepo = new MemoryRepository<>();
-	private  AvailableDeliveriesStrategy deliveryStrategy;
+	  private DeliveriesFilterSelector selector;
 
 
 	/**
@@ -37,7 +37,7 @@ public class OrderService {
      * @return
      */
     public Collection<Order> getAvailableDeliveries(Courier courier) {
-        return deliveryStrategy.getAvailableDeliveries(courier);
+        return selector.getDeliveriesFilter(courier);
     }
 
     public void addOrder(Order order) {
@@ -110,8 +110,8 @@ public class OrderService {
         return o;
     }
 
-	public void setAvailableDeliveriesStrategy(AvailableDeliveriesStrategy strategy) {
-		deliveryStrategy=strategy;
+	public void setAvailableDeliveriesStrategy(DeliveriesFilterSelector strategy) {
+		selector =strategy;
 
 	}
 }

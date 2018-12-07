@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class BelgianAvailableDeliveriesSelector implements DeliveriesFilter {
+public class BelgianAvailableDeliveriesFilter implements DeliveriesFilter {
     private UserService us;
     private OrderService os;
 
-    public BelgianAvailableDeliveriesSelector(UserService us, OrderService os) {
+    public BelgianAvailableDeliveriesFilter(UserService us, OrderService os) {
     	this.us =us;
     	this.os=os;
 

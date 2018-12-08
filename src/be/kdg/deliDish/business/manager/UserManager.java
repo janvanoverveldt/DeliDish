@@ -1,4 +1,4 @@
-package be.kdg.deliDish.business.service;
+package be.kdg.deliDish.business.manager;
 
 import be.kdg.deliDish.business.domain.user.Courier;
 import be.kdg.deliDish.business.domain.user.Customer;
@@ -7,7 +7,7 @@ import be.kdg.persistence.MemoryRepository;
 
 import java.util.Collection;
 
-public class UserService {
+public class UserManager {
     private final MemoryRepository<String,Customer> customerRepo = new MemoryRepository<>();
     private final MemoryRepository<String,Courier> courierRepo = new MemoryRepository<>();
     private static int ORDER_ACCEPTED_POINTS = 5;

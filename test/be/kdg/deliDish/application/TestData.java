@@ -1,6 +1,6 @@
 package be.kdg.deliDish.application;
 
-import be.kdg.deliDish.business.service.OrderService;
+import be.kdg.deliDish.business.manager.OrderManager;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.order.OrderEvent;
 import be.kdg.deliDish.business.domain.order.OrderLine;
@@ -132,7 +132,8 @@ class TestData {
         List<OrderLine> ols = new ArrayList<>();
         ols.add(ol);
         OrderEvent event = new OrderEvent(LocalDateTime.now().minus(tijdGeleden, ChronoUnit.MINUTES), orderState, "");
-        Order o = new Order(ols, customer.getDeliveryAdresses().get(0), orderTekst + ": " + tijdGeleden + " min, " + orderState + ", " + deliveryPoints + " points", customer, OrderService.generateOrderId(), deliveryPoints);
+        Order o = new Order(ols, customer.getDeliveryAdresses().get(0), orderTekst + ": " + tijdGeleden + " min, " + orderState + ", " + deliveryPoints + " points", customer, OrderManager
+	        .generateOrderId(), deliveryPoints);
         o.addEvent(event);
         orders.add(o);
     }

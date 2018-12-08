@@ -1,7 +1,7 @@
 package be.kdg.deliDish.application;
 
 
-import be.kdg.deliDish.business.service.*;
+import be.kdg.deliDish.business.manager.*;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.restaurant.Restaurant;
 import be.kdg.deliDish.business.domain.user.Courier;
@@ -17,10 +17,10 @@ public class DeliveryController {
     //Session Info
     private Courier appUser;
     // Orchestration classes
-    private OrderService orderService;
-    private RestoService restoService;
-    private UserService userService;
-    public DeliveryController(OrderService os, UserService is, RestoService rs) {
+    private OrderManager orderService;
+    private RestoManager restoService;
+    private UserManager userService;
+    public DeliveryController(OrderManager os, UserManager is, RestoManager rs) {
         orderService = os;
         restoService = rs;
         userService = is;

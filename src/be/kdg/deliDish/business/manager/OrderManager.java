@@ -1,4 +1,4 @@
-package be.kdg.deliDish.business.service;
+package be.kdg.deliDish.business.manager;
 
 import be.kdg.deliDish.business.delivery.*;
 import be.kdg.deliDish.business.domain.order.Order;
@@ -13,7 +13,7 @@ import be.kdg.persistence.MemoryRepository;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class OrderService {
+public class OrderManager {
     private static int orerIdSequence = 0;
     private final MemoryRepository<Integer,Order> orderRepo = new MemoryRepository<>();
 	  private DeliveriesFilterSelector selector;

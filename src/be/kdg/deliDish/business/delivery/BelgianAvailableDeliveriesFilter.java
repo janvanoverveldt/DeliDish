@@ -1,9 +1,9 @@
 package be.kdg.deliDish.business.delivery;
 
-import be.kdg.deliDish.business.service.OrderService;
+import be.kdg.deliDish.business.manager.OrderManager;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.user.Courier;
-import be.kdg.deliDish.business.service.UserService;
+import be.kdg.deliDish.business.manager.UserManager;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -12,10 +12,10 @@ import java.util.Collection;
 import java.util.List;
 
 public class BelgianAvailableDeliveriesFilter implements DeliveriesFilter {
-    private UserService us;
-    private OrderService os;
+    private UserManager us;
+    private OrderManager os;
 
-    public BelgianAvailableDeliveriesFilter(UserService us, OrderService os) {
+    public BelgianAvailableDeliveriesFilter(UserManager us, OrderManager os) {
     	this.us =us;
     	this.os=os;
 

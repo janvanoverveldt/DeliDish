@@ -2,7 +2,7 @@ package be.kdg.deliDish.application;
 
 
 import be.kdg.deliDish.business.delivery.*;
-import be.kdg.deliDish.business.service.*;
+import be.kdg.deliDish.business.manager.*;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.order.OrderState;
 import be.kdg.deliDish.business.domain.restaurant.Restaurant;
@@ -24,18 +24,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class DeliveryControllerTest {
     private static DeliveryController ctrl;
-    private static OrderService os;
-    private static UserService us;
-    private static RestoService rs;
+    private static OrderManager os;
+    private static UserManager us;
+    private static RestoManager rs;
 
 
     @BeforeEach
     public void setUp() {
         TestData data = new TestData();
 
-        os = new OrderService();
-        us = new UserService();
-        rs = new RestoService();
+        os = new OrderManager();
+        us = new UserManager();
+        rs = new RestoManager();
 
         ctrl = new DeliveryController(os, us, rs);
         ctrl.setAppUser(data.getCouriers().get(0));

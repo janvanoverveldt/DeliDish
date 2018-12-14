@@ -7,9 +7,7 @@ import be.kdg.foundation.contact.Position;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Order implements Serializable {
     private int orderID;
@@ -91,4 +89,14 @@ public class Order implements Serializable {
 	public Position getPosition() {
 	    return getOrderlines().get(0).getDish().getResto().getPosition();
 	}
+
+	/**
+     * Gets the highest preparationTime of all Dishes in the order
+     *
+     * @return time in minutes (or -1 if order is Empty)
+     */
+    public int getPreparationTime() {
+        Optional<OrderLine> longestOrderline = getOrderlines().stream().max(Comparator.comparing(ol -> ol.getDish().getProductionTime()));
+        return longestOrderline.map(orderLine -> orderLine.getDish().getProductionTime()).orElse(-1);
+    }
 }

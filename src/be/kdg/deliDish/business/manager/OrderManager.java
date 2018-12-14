@@ -3,7 +3,6 @@ package be.kdg.deliDish.business.manager;
 import be.kdg.deliDish.business.delivery.*;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.order.OrderEvent;
-import be.kdg.deliDish.business.domain.order.OrderLine;
 import be.kdg.deliDish.business.domain.order.OrderState;
 import be.kdg.deliDish.business.domain.restaurant.Restaurant;
 import be.kdg.deliDish.business.domain.user.Courier;
@@ -66,18 +65,7 @@ public class OrderManager {
         return o.getOrderlines().get(0).getDish().getResto();
     }
 
-	/**
-     * Gets the highest preparationTime of all Dishes in the order
-     *
-     * @param o
-     * @return time in minutes (or -1 if order is Empty)
-     */
-    public int getPreparationTime(Order o) {
-        Optional<OrderLine> longestOrderline = o.getOrderlines().stream().max(Comparator.comparing(ol -> ol.getDish().getProductionTime()));
-        return longestOrderline.map(orderLine -> orderLine.getDish().getProductionTime()).orElse(-1);
-    }
-
-    public Order getOrder(int orderId) {
+	public Order getOrder(int orderId) {
         return orderRepo.findOneWhere(o -> o.getOrderID() == orderId);
     }
 

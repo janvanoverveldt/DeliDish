@@ -54,17 +54,7 @@ public class OrderManager {
         return orderRepo.entities();
     }
 
-    public Collection<Order> getDeliverableOrders() {
-        return orderRepo.findWhere(Order::isAvailable);
-    }
 
-    public Position getDeliveryPosition(Order o) {
-        return o.getDeliveryAdress().getPosition();
-    }
-
-    public Restaurant getResto(Order o) {
-        return o.getOrderlines().get(0).getDish().getResto();
-    }
 
 	public Order getOrder(int orderId) {
         return orderRepo.findOneWhere(o -> o.getOrderID() == orderId);

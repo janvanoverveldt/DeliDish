@@ -57,7 +57,6 @@ public class DeliveryController {
 
 
     public Collection<Order> getAvailableDeliveries() {
-
         return orderService.getAvailableDeliveries(appUser);
     }
 

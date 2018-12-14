@@ -37,7 +37,7 @@ public class OrderManager {
      * @return
      */
     public Collection<Order> getAvailableDeliveries(Courier courier) {
-        return selector.getDeliveriesFilter(courier);
+        return selector.getDeliveriesFilter(courier).getAvailableDeliveries(courier);
     }
 
     public void addOrder(Order order) {
@@ -110,7 +110,7 @@ public class OrderManager {
         return o;
     }
 
-	public void setAvailableDeliveriesSelector(DeliveriesFilterSelector select) {
+	public void setAvailableDeliveriesStrategy(DeliveriesFilterSelector select) {
 		selector =select;
 
 	}

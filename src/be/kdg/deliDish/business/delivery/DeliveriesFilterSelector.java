@@ -30,8 +30,7 @@ private DeliveriesFilter getDeliveriesFilter(Country country){
 		deliveriesFilters.put(country, ads);
 	}
 
-	public  Collection<Order> getDeliveriesFilter(Courier courier) {
-		return getDeliveriesFilter(courier.getContactInfo().getAdress().getCity().getCountry())
-			.getAvailableDeliveries(courier);
+	public  DeliveriesFilter getDeliveriesFilter(Courier courier) {
+		return getDeliveriesFilter(courier.getContactInfo().getAdress().getCity().getCountry());
 	}
 }

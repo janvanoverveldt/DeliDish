@@ -36,15 +36,7 @@ public class UserManager {
         return courierRepo.findWhere(c -> c.isAvailable());
     }
 
-    public int getDeliveryPointsTotal(Courier c) {
-        int total = 0;
-        for (DeliveryPointEvent event : c.getDeliveryPointEvents()) {
-            total += event.getPoints();
-        }
-        return total;
-    }
-
-    public void assignOrderAcceptedPoints(Courier appUser) {
+	public void assignOrderAcceptedPoints(Courier appUser) {
         appUser.addPointEvent(new DeliveryPointEvent(ORDER_ACCEPTED_POINTS, DeliveryPointEvent.DeliveryPointEventType.ORDER_ACCEPTED));
     }
 

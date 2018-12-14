@@ -12,11 +12,9 @@ import java.util.Collection;
 import java.util.List;
 
 public class BelgianAvailableDeliveriesFilter implements DeliveriesFilter {
-    private UserManager us;
     private OrderManager os;
 
-    public BelgianAvailableDeliveriesFilter(UserManager us, OrderManager os) {
-    	this.us =us;
+    public BelgianAvailableDeliveriesFilter(OrderManager os) {
     	this.os=os;
 
     }
@@ -34,7 +32,7 @@ public class BelgianAvailableDeliveriesFilter implements DeliveriesFilter {
         for (Order order : availableOrders) {
             Ride rideToRestaurant = new Ride(courier.getCurrentPosition(), os.getPosition(order), 4);
             if (order.getOrderPlacedDateTime().plus(os.getPreparationTime(order), ChronoUnit.MINUTES).isAfter(LocalDateTime.now().plus((int) rideToRestaurant.getDuration(), ChronoUnit.MINUTES))
-                    && (order.getAverageCourierDeliveryPoints() <= us.getDeliveryPointsTotal(courier)
+                    && (order.getAverageCourierDeliveryPoints() <= courier.getDeliveryPointsTotal()
                     ||
                     order.getOrderPlacedDateTime().plusMinutes(5).isBefore(LocalDateTime.now()))) {
                 availableDeliveries.add(order);

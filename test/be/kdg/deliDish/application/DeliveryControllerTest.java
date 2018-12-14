@@ -42,7 +42,7 @@ public class DeliveryControllerTest {
         // Add the specialised Delevery selector. The default selector is created in de orderService itself.
 	    DeliveriesFilterSelector selector = new DeliveriesFilterSelector();
 	    selector.addDeliveriesFilter(DEFAULT, new DefaultAvailableDeliveriesFilter( os));
-	    selector.addDeliveriesFilter(BELGIUM, new BelgianAvailableDeliveriesFilter(us, os));
+	    selector.addDeliveriesFilter(BELGIUM, new BelgianAvailableDeliveriesFilter( os));
 				os.setAvailableDeliveriesSelector(selector);
         //Load testdata into repositories
         for (Courier courier : data.getCouriers()) {
@@ -80,7 +80,7 @@ public class DeliveryControllerTest {
         int orderID = ctrl.getAvailableDeliveries().stream().findFirst().get().getOrderID();
         Order selectedOrder = ctrl.selectDelivery(orderID);
         assertEquals(ctrl.getAppUser(),selectedOrder.getDeliverer() );
-        assertEquals(501+5 ,us.getDeliveryPointsTotal(ctrl.getAppUser()));
+        assertEquals(501+5 , ctrl.getAppUser().getDeliveryPointsTotal());
         assertEquals(OrderState.COURIER_ASSIGNED,selectedOrder.getCurrentState() );
 
 
@@ -91,7 +91,7 @@ public class DeliveryControllerTest {
         int orderID = ctrl.getAvailableDeliveries().stream().findFirst().get().getOrderID();
         Order selectedOrder = ctrl.selectDelivery(orderID);
         selectedOrder = ctrl.registerDeliveryPickup(orderID);
-        assertEquals(us.getDeliveryPointsTotal(ctrl.getAppUser()), 501 + 10);
+        assertEquals(ctrl.getAppUser().getDeliveryPointsTotal(), 501 + 10);
         assertEquals(OrderState.DISHES_UNDERWAY, selectedOrder.getCurrentState());
     }
 
@@ -101,7 +101,7 @@ public class DeliveryControllerTest {
         Order selectedOrder = ctrl.selectDelivery(orderID);
         selectedOrder = ctrl.registerDeliveryPickup(orderID);
         selectedOrder = ctrl.registerSuccesfullDelivery(orderID);
-        assertEquals(us.getDeliveryPointsTotal(ctrl.getAppUser()), 501 + 15);
+        assertEquals(ctrl.getAppUser().getDeliveryPointsTotal(), 501 + 15);
         assertEquals(OrderState.DELIVERED, selectedOrder.getCurrentState());
     }
 

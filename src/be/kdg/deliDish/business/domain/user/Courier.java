@@ -55,4 +55,12 @@ public class Courier extends User {
 
         isAvailable = available;
     }
+
+	public int getDeliveryPointsTotal() {
+	    int total = 0;
+	    for (DeliveryPointEvent event : getDeliveryPointEvents()) {
+	        total += event.getPoints();
+	    }
+	    return total;
+	}
 }

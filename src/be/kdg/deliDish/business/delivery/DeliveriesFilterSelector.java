@@ -1,10 +1,8 @@
 package be.kdg.deliDish.business.delivery;
 
-import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.user.Courier;
 import be.kdg.foundation.contact.Country;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -15,8 +13,7 @@ public class DeliveriesFilterSelector {
 
 
 private DeliveriesFilter getDeliveriesFilter(Country country){
-	final DeliveriesFilter selector = deliveriesFilters.get(
-		country);
+	final DeliveriesFilter selector = deliveriesFilters.get(country);
 	return selector!=null?selector: getDeliveriesFilter();
 }
 	private DeliveriesFilter getDeliveriesFilter(){
@@ -30,7 +27,6 @@ private DeliveriesFilter getDeliveriesFilter(Country country){
 		deliveriesFilters.put(country, ads);
 	}
 
-	public  DeliveriesFilter getDeliveriesFilter(Courier courier) {
-		return getDeliveriesFilter(courier.getContactInfo().getAdress().getCity().getCountry());
-	}
+	public DeliveriesFilter getDeliveriesFilter(Courier courier) {
+		return getDeliveriesFilter(courier.getContactInfo().getAdress().getCity().getCountry());	}
 }

@@ -83,9 +83,31 @@ public class MemoryRepository<K,V extends Serializable> implements Repository<K,
 
 	@Override
 	public List<V> findWhere(Predicate<V> predicate, Comparator<V> sorter) {
+
+		return findWhere(predicate,sorter,-1);
+	}
+
+	@Override
+	public List<V> findWhere(Predicate<V> predicate, long limit) {
+
+		return findWhere(predicate,null,limit);
+	}
+
+	/**
+	 *
+	 * @param predicate test indicating if an element should be returned
+	 * @param sorter comparator for sorting the result
+	 * @param number maximum number of items to be returned. A number smaller than 1 means no limit
+	 * @return A List of matching elements
+	 */
+	@Override
+	public List<V> findWhere(Predicate<V> predicate, Comparator<V> sorter, long number) {
 		Stream<V> result = findStream(predicate);
 		if (sorter != null) {
 			result = result.sorted(sorter);
+		}
+		if (number > 0){
+			result = result.limit(number);
 		}
 		return result.collect(Collectors.toList());
 	}

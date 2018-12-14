@@ -11,7 +11,9 @@ import java.util.List;
 public class Courier extends User {
 
     private Position currentPosition;
-    private boolean isAvailable;
+		private int currentDeliveryPointsTotal=0;
+
+	private boolean isAvailable;
     private List<DeliveryPointEvent> pointEvents = new ArrayList<>();
     private Partner partner;
 
@@ -41,6 +43,7 @@ public class Courier extends User {
 
     public void addPointEvent(DeliveryPointEvent e) {
         pointEvents.add(e);
+        currentDeliveryPointsTotal += e.getPoints();
     }
 
     public Collection<DeliveryPointEvent> getDeliveryPointEvents() {
@@ -57,10 +60,6 @@ public class Courier extends User {
     }
 
 	public int getDeliveryPointsTotal() {
-	    int total = 0;
-	    for (DeliveryPointEvent event : getDeliveryPointEvents()) {
-	        total += event.getPoints();
-	    }
-	    return total;
+	    return currentDeliveryPointsTotal;
 	}
 }

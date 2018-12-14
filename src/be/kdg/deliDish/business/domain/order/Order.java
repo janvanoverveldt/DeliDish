@@ -99,4 +99,8 @@ public class Order implements Serializable {
         Optional<OrderLine> longestOrderline = getOrderlines().stream().max(Comparator.comparing(ol -> ol.getDish().getProductionTime()));
         return longestOrderline.map(orderLine -> orderLine.getDish().getProductionTime()).orElse(-1);
     }
+
+	public boolean isAvailable() {
+		return getCurrentState() == OrderState.ORDER_PLACED;
+	}
 }

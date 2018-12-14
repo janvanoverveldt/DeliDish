@@ -36,7 +36,8 @@ public class OrderManager {
      * @return
      */
     public Collection<Order> getAvailableDeliveries(Courier courier) {
-        return selector.getDeliveriesFilter(courier).getAvailableDeliveries(courier);
+    	DeliveriesFilter filter = selector.getDeliveriesFilter(courier);
+        return orderRepo.findWhere(o -> filter.select(o,courier),filter.getLimit());
     }
 
     public void addOrder(Order order) {
@@ -54,7 +55,7 @@ public class OrderManager {
     }
 
     public Collection<Order> getDeliverableOrders() {
-        return orderRepo.findWhere(order -> order.getCurrentState() == OrderState.ORDER_PLACED);
+        return orderRepo.findWhere(Order::isAvailable);
     }
 
     public Position getDeliveryPosition(Order o) {

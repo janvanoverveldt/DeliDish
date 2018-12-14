@@ -18,7 +18,11 @@ public interface Repository<K,V > {
 
     List<V> findWhere(Predicate<V> predicate, Comparator<V> sorter);
 
-    /**
+	List<V> findWhere(Predicate<V> predicate, long limit);
+
+	List<V> findWhere(Predicate<V> predicate, Comparator<V> sorter, long number);
+
+	/**
      * @param predicate where condition
      * @return found object or null. This REALLY should return an Optional, but we do not want to
      * confuse users that do not know Optional

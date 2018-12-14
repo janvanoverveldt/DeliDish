@@ -72,7 +72,7 @@ public class DeliveryControllerTest {
         //Voor de courier uit de US wordt de default selector gebruikt en zijn daarom alle leverbare orders beschikbaar.
         ctrl.setAppUser(us.getCouriers().stream().filter(u -> u.getFirstName().equals("Frats")).findFirst().get());
         Collection<Order> availableDeliveries2 = ctrl.getAvailableDeliveries();
-        assertEquals(4, availableDeliveries2.size(), "4 orders voldoen aan de voorwaarden");
+        assertEquals(3, availableDeliveries2.size(), "3 orders voldoen aan de voorwaarden");
     }
 
     @Test

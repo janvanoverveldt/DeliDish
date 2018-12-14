@@ -43,7 +43,7 @@ public class DeliveryControllerTest {
 	    DeliveriesFilterSelector selector = new DeliveriesFilterSelector();
 	    selector.addDeliveriesFilter(DEFAULT, new DefaultAvailableDeliveriesFilter( os));
 	    selector.addDeliveriesFilter(BELGIUM, new BelgianAvailableDeliveriesFilter(us, os));
-			os.setAvailableDeliveriesSelector(selector);
+				os.setAvailableDeliveriesSelector(selector);
         //Load testdata into repositories
         for (Courier courier : data.getCouriers()) {
             ctrl.addCourier(courier);

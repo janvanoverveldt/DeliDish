@@ -110,7 +110,7 @@ public class OrderManager {
         return o;
     }
 
-	public void setAvailableDeliveriesStrategy(DeliveriesFilterSelector select) {
+	public void setAvailableDeliveriesSelector(DeliveriesFilterSelector select) {
 		selector =select;
 
 	}

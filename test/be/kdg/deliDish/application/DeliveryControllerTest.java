@@ -40,10 +40,10 @@ public class DeliveryControllerTest {
         ctrl = new DeliveryController(os, us, rs);
         ctrl.setAppUser(data.getCouriers().get(0));
         // Add the specialised Delevery selector. The default selector is created in de orderService itself.
-	    DeliveriesFilterSelector deliveryStrategy = new DeliveriesFilterSelector();
-	    deliveryStrategy.addDeliveriesFilter(DEFAULT, new DefaultAvailableDeliveriesFilter( os));
-	    deliveryStrategy.addDeliveriesFilter(BELGIUM, new BelgianAvailableDeliveriesFilter(us, os));
-			os.setAvailableDeliveriesStrategy(deliveryStrategy);
+	    DeliveriesFilterSelector selector = new DeliveriesFilterSelector();
+	    selector.addDeliveriesFilter(DEFAULT, new DefaultAvailableDeliveriesFilter( os));
+	    selector.addDeliveriesFilter(BELGIUM, new BelgianAvailableDeliveriesFilter(us, os));
+			os.setAvailableDeliveriesSelector(selector);
         //Load testdata into repositories
         for (Courier courier : data.getCouriers()) {
             ctrl.addCourier(courier);

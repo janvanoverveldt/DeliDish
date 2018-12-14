@@ -3,7 +3,6 @@ package be.kdg.deliDish.business.delivery;
 import be.kdg.deliDish.business.manager.OrderManager;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.user.Courier;
-import be.kdg.deliDish.business.manager.UserManager;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -30,7 +29,7 @@ public class BelgianAvailableDeliveriesFilter implements DeliveriesFilter {
         List<Order> availableDeliveries = new ArrayList<>();
 
         for (Order order : availableOrders) {
-            Ride rideToRestaurant = new Ride(courier.getCurrentPosition(), os.getPosition(order), 4);
+            Ride rideToRestaurant = new Ride(courier.getCurrentPosition(), order.getPosition(), 4);
             if (order.getOrderPlacedDateTime().plus(os.getPreparationTime(order), ChronoUnit.MINUTES).isAfter(LocalDateTime.now().plus((int) rideToRestaurant.getDuration(), ChronoUnit.MINUTES))
                     && (order.getAverageCourierDeliveryPoints() <= courier.getDeliveryPointsTotal()
                     ||

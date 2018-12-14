@@ -66,11 +66,7 @@ public class OrderManager {
         return o.getOrderlines().get(0).getDish().getResto();
     }
 
-    public Position getPosition(Order o) {
-        return o.getOrderlines().get(0).getDish().getResto().getPosition();
-    }
-
-    /**
+	/**
      * Gets the highest preparationTime of all Dishes in the order
      *
      * @param o

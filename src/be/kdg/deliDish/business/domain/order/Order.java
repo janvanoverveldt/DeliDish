@@ -3,6 +3,7 @@ package be.kdg.deliDish.business.domain.order;
 import be.kdg.deliDish.business.domain.user.Courier;
 import be.kdg.deliDish.business.domain.user.Customer;
 import be.kdg.foundation.contact.Adress;
+import be.kdg.foundation.contact.Position;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -85,5 +86,9 @@ public class Order implements Serializable {
 	@Override
 	public int hashCode() {
 		return Objects.hash(orderID);
+	}
+
+	public Position getPosition() {
+	    return getOrderlines().get(0).getDish().getResto().getPosition();
 	}
 }

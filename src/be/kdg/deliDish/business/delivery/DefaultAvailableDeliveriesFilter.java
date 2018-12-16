@@ -4,6 +4,7 @@ import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.user.Courier;
 
 import java.util.Collection;
+import java.util.Comparator;
 
 public class DefaultAvailableDeliveriesFilter implements DeliveriesFilter {
 
@@ -18,5 +19,8 @@ public class DefaultAvailableDeliveriesFilter implements DeliveriesFilter {
 		return 3;
 	}
 
-
+	@Override
+	public Comparator<Order> orderBy() {
+		return Comparator.comparing(Order::getOrderPlacedDateTime);
+	}
 }

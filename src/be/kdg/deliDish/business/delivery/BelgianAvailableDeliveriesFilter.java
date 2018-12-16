@@ -5,6 +5,7 @@ import be.kdg.deliDish.business.domain.user.Courier;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Comparator;
 
 public class BelgianAvailableDeliveriesFilter implements DeliveriesFilter {
 
@@ -23,5 +24,10 @@ public class BelgianAvailableDeliveriesFilter implements DeliveriesFilter {
 	@Override
 	public long getLimit() {
 		return -1;
+	}
+
+	@Override
+	public Comparator<Order> orderBy() {
+		return null;
 	}
 }

@@ -37,7 +37,7 @@ public class OrderManager {
      */
     public Collection<Order> getAvailableDeliveries(Courier courier) {
     	DeliveriesFilter filter = selector.getDeliveriesFilter(courier);
-        return orderRepo.findWhere(o -> filter.select(o,courier),filter.getLimit());
+        return orderRepo.findWhere(o -> filter.select(o,courier),filter.orderBy(),filter.getLimit());
     }
 
     public void addOrder(Order order) {

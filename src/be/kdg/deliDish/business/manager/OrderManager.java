@@ -4,9 +4,7 @@ import be.kdg.deliDish.business.delivery.*;
 import be.kdg.deliDish.business.domain.order.Order;
 import be.kdg.deliDish.business.domain.order.OrderEvent;
 import be.kdg.deliDish.business.domain.order.OrderState;
-import be.kdg.deliDish.business.domain.restaurant.Restaurant;
 import be.kdg.deliDish.business.domain.user.Courier;
-import be.kdg.foundation.contact.Position;
 import be.kdg.persistence.MemoryRepository;
 
 import java.time.LocalDateTime;
@@ -55,14 +53,10 @@ public class OrderManager {
     }
 
 
-
-	public Order getOrder(int orderId) {
-        return orderRepo.findOneWhere(o -> o.getOrderID() == orderId);
-    }
-
-    public Order assignOrder(int orderId, Courier appUser) {
-        Order o = registerOrderEvent(orderId, OrderState.COURIER_ASSIGNED, "");
-        o.setDeliverer(appUser);
+	public Order assignOrder(int orderId, Courier appUser) {
+    	Order o = orderRepo.get(orderId);
+				o.setDeliverer(appUser);
+        registerOrderEvent(o, OrderState.COURIER_ASSIGNED, "");
         return o;
     }
 
@@ -79,11 +73,15 @@ public class OrderManager {
     }
 
     private Order registerOrderEvent(int orderId, OrderState state, String remark) {
-        Order o = getOrder(orderId);
-        o.addEvent(new OrderEvent(state, remark));
-        orderRepo.update(orderId,o);
-        return o;
+	    Order o = orderRepo.get(orderId);
+	    return registerOrderEvent(o, state, remark);
     }
+
+	private Order registerOrderEvent(Order o, OrderState state, String remark) {
+		o.addEvent(new OrderEvent(state, remark));
+		orderRepo.update(o.getOrderID(),o);
+		return o;
+	}
 
 	public void setAvailableDeliveriesSelector(DeliveriesFilterSelector select) {
 		selector =select;

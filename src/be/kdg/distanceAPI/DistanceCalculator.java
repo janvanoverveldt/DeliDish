@@ -18,7 +18,7 @@ public class DistanceCalculator {
      * @param point2
      * @return
      */
-    public double getDistance(Position point1, Position point2) {
+    public double getDistance(Point point1, Point point2) {
         // transform to point
         SpatialContext ctx = SpatialContext.GEO;
         return DistanceUtils.DEG_TO_KM * ctx.calcDistance(point1, point2);

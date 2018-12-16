@@ -6,5 +6,5 @@ package be.kdg.deliDish.business.delivery;
 public interface Move {
     double getDistance();
 
-    double getDuration();
+    int getDuration();
 }

@@ -95,12 +95,12 @@ public class Order implements Serializable {
      *
      * @return time in minutes (or -1 if order is Empty)
      */
-    public int getPreparationTime() {
+    public int getProductionTime() {
         Optional<OrderLine> longestOrderline = getOrderlines().stream().max(Comparator.comparing(ol -> ol.getDish().getProductionTime()));
         return longestOrderline.map(orderLine -> orderLine.getDish().getProductionTime()).orElse(-1);
     }
 
-	public boolean isAvailable() {
-		return getCurrentState() == OrderState.ORDER_PLACED;
+	public boolean hasCurrentState(OrderState state) {
+		return getCurrentState() == state;
 	}
 }

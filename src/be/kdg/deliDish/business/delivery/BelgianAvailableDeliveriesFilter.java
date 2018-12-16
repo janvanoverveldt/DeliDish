@@ -9,10 +9,11 @@ import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 
 public class BelgianAvailableDeliveriesFilter implements DeliveriesFilter {
+	private static final int COURIER_SPEED=15;
 
 
 	public boolean select(Order order, Courier courier) {
-		Ride rideToRestaurant = new Ride(courier.getCurrentPosition(), order.getPosition(), 4);
+		Ride rideToRestaurant = new Ride(courier.getCurrentPosition(), order.getPosition(), 60/COURIER_SPEED);
 		return order.hasCurrentState(OrderState.ORDER_PLACED)
 			&& order.getOrderPlacedDateTime()
 				.plus(order.getProductionTime(), ChronoUnit.MINUTES)

@@ -17,4 +17,6 @@ public class DefaultAvailableDeliveriesFilter implements DeliveriesFilter {
 	public long getLimit() {
 		return 3;
 	}
+
+
 }

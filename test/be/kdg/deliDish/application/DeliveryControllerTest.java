@@ -80,8 +80,8 @@ public class DeliveryControllerTest {
       int orderID = ctrl.getAvailableDeliveries().stream().findFirst().get().getOrderID();
         Order selectedOrder = ctrl.selectDelivery(orderID);
         assertEquals(selectedOrder.getDeliverer(), ctrl.getAppUser());
-        assertEquals(ctrl.getDeliveryPointsTotal(ctrl.getAppUser()), 501 + 5);
-        assertEquals(selectedOrder.getCurrentState(), OrderState.COURIER_ASSIGNED);
+        assertEquals(501 + 5,ctrl.getDeliveryPointsTotal(ctrl.getAppUser()));
+        assertEquals( OrderState.COURIER_ASSIGNED,selectedOrder.getCurrentState());
     }
 
     //TODO (Week 4-5): De volgende twee methoden kunnen optioneel worden uitgewerkt:

@@ -1,7 +1,8 @@
-package be.kdg.deliDish.business.delivery;
+package be.kdg.foundation.contact;
 
 import be.kdg.distanceAPI.DistanceCalculator;
 import be.kdg.distanceAPI.Point;
+import be.kdg.foundation.contact.Move;
 import be.kdg.foundation.contact.Position;
 
 /**

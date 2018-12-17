@@ -1,6 +1,6 @@
-package be.kdg.deliDish.business.domain.financial;
+package be.kdg.deliDish.domain.financial;
 
-import be.kdg.deliDish.business.domain.user.Partner;
+import be.kdg.deliDish.domain.user.Partner;
 
 import java.time.LocalDateTime;
 

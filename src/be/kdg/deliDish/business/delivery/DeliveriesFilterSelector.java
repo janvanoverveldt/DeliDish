@@ -1,6 +1,6 @@
 package be.kdg.deliDish.business.delivery;
 
-import be.kdg.deliDish.business.domain.user.Courier;
+import be.kdg.deliDish.domain.user.Courier;
 import be.kdg.foundation.contact.Country;
 
 import java.util.Map;

@@ -1,4 +1,4 @@
-package be.kdg.deliDish.business.domain.financial;
+package be.kdg.deliDish.domain.financial;
 
 import java.time.LocalDateTime;
 

@@ -1,7 +1,7 @@
-package be.kdg.deliDish.business.domain.restaurant;
+package be.kdg.deliDish.domain.restaurant;
 
 
-import be.kdg.deliDish.business.domain.user.Partner;
+import be.kdg.deliDish.domain.user.Partner;
 import be.kdg.foundation.contact.Adress;
 import be.kdg.foundation.contact.Position;
 

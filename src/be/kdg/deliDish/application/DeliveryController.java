@@ -1,11 +1,11 @@
 package be.kdg.deliDish.application;
 
 
-import be.kdg.deliDish.business.manager.*;
-import be.kdg.deliDish.business.domain.order.Order;
-import be.kdg.deliDish.business.domain.restaurant.Restaurant;
-import be.kdg.deliDish.business.domain.user.Courier;
-import be.kdg.deliDish.business.domain.user.Customer;
+import be.kdg.deliDish.business.*;
+import be.kdg.deliDish.domain.order.Order;
+import be.kdg.deliDish.domain.restaurant.Restaurant;
+import be.kdg.deliDish.domain.user.Courier;
+import be.kdg.deliDish.domain.user.Customer;
 
 import java.util.Collection;
 

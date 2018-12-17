@@ -1,18 +1,18 @@
 package be.kdg.deliDish.application;
 
-import be.kdg.deliDish.business.manager.OrderManager;
-import be.kdg.deliDish.business.domain.order.Order;
-import be.kdg.deliDish.business.domain.order.OrderEvent;
-import be.kdg.deliDish.business.domain.order.OrderLine;
-import be.kdg.deliDish.business.domain.order.OrderState;
-import be.kdg.deliDish.business.domain.restaurant.Allergen;
-import be.kdg.deliDish.business.domain.restaurant.Dish;
-import be.kdg.deliDish.business.domain.restaurant.OpeningPeriod;
-import be.kdg.deliDish.business.domain.restaurant.Restaurant;
-import be.kdg.deliDish.business.domain.user.Courier;
-import be.kdg.deliDish.business.domain.user.Customer;
-import be.kdg.deliDish.business.domain.user.DeliveryPointEvent;
-import be.kdg.deliDish.business.domain.user.Partner;
+import be.kdg.deliDish.business.OrderManager;
+import be.kdg.deliDish.domain.order.Order;
+import be.kdg.deliDish.domain.order.OrderEvent;
+import be.kdg.deliDish.domain.order.OrderLine;
+import be.kdg.deliDish.domain.order.OrderState;
+import be.kdg.deliDish.domain.restaurant.Allergen;
+import be.kdg.deliDish.domain.restaurant.Dish;
+import be.kdg.deliDish.domain.restaurant.OpeningPeriod;
+import be.kdg.deliDish.domain.restaurant.Restaurant;
+import be.kdg.deliDish.domain.user.Courier;
+import be.kdg.deliDish.domain.user.Customer;
+import be.kdg.deliDish.domain.user.DeliveryPointEvent;
+import be.kdg.deliDish.domain.user.Partner;
 import be.kdg.foundation.contact.*;
 import be.kdg.foundation.financial.RekeningNummer;
 

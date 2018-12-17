@@ -1,4 +1,4 @@
-package be.kdg.deliDish.business.domain.restaurant;
+package be.kdg.deliDish.domain.restaurant;
 
 import java.io.Serializable;
 import java.time.DayOfWeek;

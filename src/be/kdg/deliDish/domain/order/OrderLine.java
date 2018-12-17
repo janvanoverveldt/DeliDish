@@ -1,6 +1,6 @@
-package be.kdg.deliDish.business.domain.order;
+package be.kdg.deliDish.domain.order;
 
-import be.kdg.deliDish.business.domain.restaurant.Dish;
+import be.kdg.deliDish.domain.restaurant.Dish;
 
 import java.io.Serializable;
 

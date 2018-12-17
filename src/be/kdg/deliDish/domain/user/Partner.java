@@ -1,4 +1,4 @@
-package be.kdg.deliDish.business.domain.user;
+package be.kdg.deliDish.domain.user;
 
 import be.kdg.foundation.financial.RekeningNummer;
 

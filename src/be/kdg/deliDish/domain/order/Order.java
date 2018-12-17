@@ -1,7 +1,7 @@
-package be.kdg.deliDish.business.domain.order;
+package be.kdg.deliDish.domain.order;
 
-import be.kdg.deliDish.business.domain.user.Courier;
-import be.kdg.deliDish.business.domain.user.Customer;
+import be.kdg.deliDish.domain.user.Courier;
+import be.kdg.deliDish.domain.user.Customer;
 import be.kdg.foundation.contact.Adress;
 import be.kdg.foundation.contact.Position;
 

@@ -1,4 +1,4 @@
-package be.kdg.deliDish.business.domain.order;
+package be.kdg.deliDish.domain.order;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

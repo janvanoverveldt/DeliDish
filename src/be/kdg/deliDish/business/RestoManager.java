@@ -1,6 +1,6 @@
-package be.kdg.deliDish.business.manager;
+package be.kdg.deliDish.business;
 
-import be.kdg.deliDish.business.domain.restaurant.Restaurant;
+import be.kdg.deliDish.domain.restaurant.Restaurant;
 import be.kdg.persistence.MemoryRepository;
 
 import java.util.Collection;

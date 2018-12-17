@@ -1,10 +1,10 @@
-package be.kdg.deliDish.business.manager;
+package be.kdg.deliDish.business;
 
 import be.kdg.deliDish.business.delivery.*;
-import be.kdg.deliDish.business.domain.order.Order;
-import be.kdg.deliDish.business.domain.order.OrderEvent;
-import be.kdg.deliDish.business.domain.order.OrderState;
-import be.kdg.deliDish.business.domain.user.Courier;
+import be.kdg.deliDish.domain.order.Order;
+import be.kdg.deliDish.domain.order.OrderEvent;
+import be.kdg.deliDish.domain.order.OrderState;
+import be.kdg.deliDish.domain.user.Courier;
 import be.kdg.persistence.MemoryRepository;
 
 import java.time.LocalDateTime;

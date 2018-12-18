@@ -3,6 +3,7 @@ package be.kdg.deliDish.business.delivery;
 import be.kdg.deliDish.domain.order.Order;
 import be.kdg.deliDish.domain.order.OrderState;
 import be.kdg.deliDish.domain.user.Courier;
+import be.kdg.foundation.contact.Move;
 import be.kdg.foundation.contact.Ride;
 
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ public class BelgianAvailableDeliveriesFilter implements DeliveriesFilter {
 
 
 	public boolean select(Order order, Courier courier) {
-		Ride rideToRestaurant = new Ride(courier.getCurrentPosition(), order.getPosition(), 60/COURIER_SPEED);
+		Move rideToRestaurant = new Ride(courier.getCurrentPosition(), order.getPosition(), 60/COURIER_SPEED);
 		return order.hasCurrentState(OrderState.ORDER_PLACED)
 			&& order.getOrderPlacedDateTime()
 				.plus(order.getProductionTime(), ChronoUnit.MINUTES)

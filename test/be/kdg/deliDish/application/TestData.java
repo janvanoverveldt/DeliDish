@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static be.kdg.deliDish.domain.user.DeliveryPointEvent.*;
 import static be.kdg.foundation.contact.Country.*;
 
 /**
@@ -80,11 +81,10 @@ class TestData {
 
     private void makeCouriers() {
         Courier courierThatInteracts = new Courier("Frits", "Den Dichterbij", new ContactInfo(new Adress("Volkstraat", "10", cities.get(1), new Position(51.211759, 4.396674)), "frits@kdg.be", "032545856"), new Position(51.219090, 4.399394), new Partner(new RekeningNummer("BE11111111111111111")));
-        DeliveryPointEvent dpe = new DeliveryPointEvent(501, DeliveryPointEvent.DeliveryPointEventType.ORDER_PICKUP_ONTIME);
-        courierThatInteracts.addPointEvent(dpe);
+        courierThatInteracts.addPointEvent(DeliveryPointEventType.START_EVENT);
         couriers.add(courierThatInteracts);
         Courier courierWithOtherAlgoritm = new Courier("Frats", "Van UitAmerica", new ContactInfo(new Adress("BlaBla", "10", cities.get(9), new Position(51.211759, 4.396674)), "frits@kdg.be", "032545856"), new Position(51.219090, 4.399394), new Partner(new RekeningNummer("BE11111111111111111")));
-        DeliveryPointEvent dpe2 = new DeliveryPointEvent(501, DeliveryPointEvent.DeliveryPointEventType.ORDER_PICKUP_ONTIME);
+        DeliveryPointEvent dpe2 = new DeliveryPointEvent(DeliveryPointEventType.START_EVENT);
         couriers.add(courierWithOtherAlgoritm);
 
     }
@@ -131,10 +131,9 @@ class TestData {
         OrderLine ol = new OrderLine(dish, 4, "No remark");
         List<OrderLine> ols = new ArrayList<>();
         ols.add(ol);
-        OrderEvent event = new OrderEvent(LocalDateTime.now().minus(tijdGeleden, ChronoUnit.MINUTES), orderState, "");
         Order o = new Order(ols, customer.getDeliveryAdresses().get(0), orderTekst + ": " + tijdGeleden + " min, " + orderState + ", " + deliveryPoints + " points", customer, OrderManager
 	        .generateOrderId(), deliveryPoints);
-        o.addEvent(event);
+        o.addEvent(LocalDateTime.now().minus(tijdGeleden, ChronoUnit.MINUTES), orderState, "");
         orders.add(o);
     }
 

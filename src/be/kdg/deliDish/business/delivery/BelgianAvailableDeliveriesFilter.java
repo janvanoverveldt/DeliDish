@@ -17,8 +17,7 @@ public class BelgianAvailableDeliveriesFilter implements DeliveriesFilter {
 	public boolean select(Order order, Courier courier) {
 		Move rideToRestaurant = new Ride(courier.getCurrentPosition(), order.getPosition(), 60/COURIER_SPEED);
 		return order.hasCurrentState(OrderState.ORDER_PLACED)
-			&& order.getOrderPlacedDateTime()
-				.plus(order.getProductionTime(), ChronoUnit.MINUTES)
+			&& order.getProductionDateTime()
 				.isAfter(LocalDateTime.now().plus((int) rideToRestaurant.getDuration(), ChronoUnit.MINUTES))
 			&& (order.getAverageCourierDeliveryPoints() <= courier.getDeliveryPointsTotal()
 				|| order.getOrderPlacedDateTime().plusMinutes(5).isBefore(LocalDateTime.now()));

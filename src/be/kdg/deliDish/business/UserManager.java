@@ -3,6 +3,7 @@ package be.kdg.deliDish.business;
 import be.kdg.deliDish.domain.user.Courier;
 import be.kdg.deliDish.domain.user.Customer;
 import be.kdg.deliDish.domain.user.DeliveryPointEvent;
+import be.kdg.deliDish.domain.user.DeliveryPointEvent.DeliveryPointEventType;
 import be.kdg.persistence.MemoryRepository;
 
 import java.util.Collection;
@@ -10,9 +11,7 @@ import java.util.Collection;
 public class UserManager {
     private final MemoryRepository<String,Customer> customerRepo = new MemoryRepository<>();
     private final MemoryRepository<String,Courier> courierRepo = new MemoryRepository<>();
-    private static int ORDER_ACCEPTED_POINTS = 5;
-    private static int ORDER_PICKUP_ONTIME_POINTS = 5;
-    private static int ORDER_PICKUP_LATE_POINTS = -5;
+
 
     public void addCustomer(Customer customer) {
         customerRepo.put(customer.getEmail(),customer);
@@ -36,16 +35,8 @@ public class UserManager {
         return courierRepo.findWhere(c -> c.isAvailable());
     }
 
-	public void assignOrderAcceptedPoints(Courier appUser) {
-        appUser.addPointEvent(new DeliveryPointEvent(ORDER_ACCEPTED_POINTS, DeliveryPointEvent.DeliveryPointEventType.ORDER_ACCEPTED));
+    public void assignPoints(Courier appUser, DeliveryPointEventType event){
+	    appUser.addPointEvent(event);
     }
 
-    public void addOnTimePickupPoints(Courier appUser) {
-        appUser.addPointEvent(new DeliveryPointEvent(ORDER_PICKUP_ONTIME_POINTS, DeliveryPointEvent.DeliveryPointEventType.ORDER_PICKUP_ONTIME));
-    }
-
-    public void deductLatePickupPoints(Courier appUser) {
-        appUser.addPointEvent(new DeliveryPointEvent(ORDER_PICKUP_LATE_POINTS, DeliveryPointEvent.DeliveryPointEventType.ORDER_PICKUP_LATE));
-
-    }
 }

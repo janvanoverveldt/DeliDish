@@ -1,6 +1,7 @@
 package be.kdg.deliDish.domain.user;
 
 
+import be.kdg.deliDish.domain.user.DeliveryPointEvent.DeliveryPointEventType;
 import be.kdg.foundation.contact.ContactInfo;
 import be.kdg.foundation.contact.Position;
 
@@ -41,11 +42,6 @@ public class Courier extends User {
         return isAvailable;
     }
 
-    public void addPointEvent(DeliveryPointEvent e) {
-        pointEvents.add(e);
-        currentDeliveryPointsTotal += e.getPoints();
-    }
-
     public Collection<DeliveryPointEvent> getDeliveryPointEvents() {
         return pointEvents;
     }
@@ -61,5 +57,10 @@ public class Courier extends User {
 
 	public int getDeliveryPointsTotal() {
 	    return currentDeliveryPointsTotal;
+	}
+
+	public void addPointEvent(DeliveryPointEventType event) {
+    	pointEvents.add(new DeliveryPointEvent(event));
+			currentDeliveryPointsTotal += event.getPoints();
 	}
 }

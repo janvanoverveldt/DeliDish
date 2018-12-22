@@ -7,6 +7,7 @@ import be.kdg.foundation.contact.Position;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.temporal.TemporalUnit;
 import java.util.*;
 
 public class Order implements Serializable {
@@ -65,10 +66,6 @@ public class Order implements Serializable {
         return orderlines;
     }
 
-    public void addEvent(OrderEvent e) {
-        events.add(e);
-    }
-
     public int getOrderID() {
         return orderID;
     }
@@ -95,12 +92,30 @@ public class Order implements Serializable {
      *
      * @return time in minutes (or -1 if order is Empty)
      */
-    public int getProductionTime() {
+    public int getProductionDuration() {
         Optional<OrderLine> longestOrderline = getOrderlines().stream().max(Comparator.comparing(ol -> ol.getDish().getProductionTime()));
         return longestOrderline.map(orderLine -> orderLine.getDish().getProductionTime()).orElse(-1);
     }
 
+    public LocalDateTime getProductionDateTime(){
+	    return getOrderPlacedDateTime().plusMinutes(getProductionDuration());
+    }
+
+    // to be implemented
+	public LocalDateTime getDeliveryDateTime(){
+		return getOrderPlacedDateTime().plusMinutes(getProductionDuration());
+	}
+
+
 	public boolean hasCurrentState(OrderState state) {
 		return getCurrentState() == state;
+	}
+
+	public void addEvent(OrderState state, String remark) {
+    	events.add(new OrderEvent(state, remark));
+	}
+
+	public void addEvent(LocalDateTime timestamp,OrderState state, String remark) {
+		events.add(new OrderEvent(timestamp,state, remark));
 	}
 }

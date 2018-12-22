@@ -4,91 +4,87 @@ package be.kdg.deliDish.application;
 import be.kdg.deliDish.business.*;
 import be.kdg.deliDish.domain.order.Order;
 import be.kdg.deliDish.domain.restaurant.Restaurant;
-import be.kdg.deliDish.domain.user.Courier;
-import be.kdg.deliDish.domain.user.Customer;
+import be.kdg.deliDish.domain.user.*;
 
 import java.util.Collection;
+
+import static be.kdg.deliDish.domain.user.DeliveryPointEvent.DeliveryPointEventType.*;
 
 /**
  * @author Jan Van Overveldt.
  */
 // Dit is de controllerklasse van het BackOffice subsysteem
 public class DeliveryController {
-    //Session Info
-    private Courier appUser;
-    // Orchestration classes
-    private OrderManager orderService;
-    private RestoManager restoService;
-    private UserManager userService;
-    public DeliveryController(OrderManager os, UserManager is, RestoManager rs) {
-        orderService = os;
-        restoService = rs;
-        userService = is;
-    }
+	//Session Info
+	private Courier appUser;
+	// Orchestration classes
+	private OrderManager orderService;
+	private RestoManager restoService;
+	private UserManager userService;
 
-    public Courier getAppUser() {
-        return appUser;
-    }
+	public DeliveryController(OrderManager os, UserManager is, RestoManager rs) {
+		orderService = os;
+		restoService = rs;
+		userService = is;
+	}
 
-    /**
-     * Sets the sessionUser
-     *
-     * @param appUser
-     */
-    public void setAppUser(Courier appUser) {
-        this.appUser = appUser;
-    }
+	public Courier getAppUser() {
+		return appUser;
+	}
 
-    public void addOrder(Order o) {
-        orderService.addOrder(o);
-    }
+	/**
+	 * Sets the sessionUser
+	 *
+	 * @param appUser
+	 */
+	public void setAppUser(Courier appUser) {
+		this.appUser = appUser;
+	}
 
-    public void addCourier(Courier courier) {
-        userService.addCourier(courier);
-    }
+	public void addOrder(Order o) {
+		orderService.addOrder(o);
+	}
 
-    public void addCustomer(Customer customer) {
-        userService.addCustomer(customer);
-    }
+	public void addCourier(Courier courier) {
+		userService.addCourier(courier);
+	}
 
-    public void addResto(Restaurant restaurant) {
-        restoService.addResto(restaurant);
-    }
+	public void addCustomer(Customer customer) {
+		userService.addCustomer(customer);
+	}
+
+	public void addResto(Restaurant restaurant) {
+		restoService.addResto(restaurant);
+	}
 
 
-    public Collection<Order> getAvailableDeliveries() {
-        return orderService.getAvailableDeliveries(appUser);
-    }
+	public Collection<Order> getAvailableDeliveries() {
+		return orderService.getAvailableDeliveries(appUser);
+	}
 
-    public Order selectDelivery(int orderId) {
-        Order o = orderService.assignOrder(orderId, appUser);
-        userService.assignOrderAcceptedPoints(appUser);
-        appUser.setAvailable(false);
-        return o;
-    }
+	public Order selectDelivery(int orderId) {
+		Order o = orderService.assignOrder(orderId, appUser);
+		userService.assignPoints(appUser, ORDER_ACCEPTED);
+		appUser.setAvailable(false);
+		return o;
+	}
 
-    public Order registerDeliveryPickup(int orderId) {
-        Order o = orderService.registerOrderPickup(orderId);
-        if (orderService.isOnTimePickup(o)) {
-            userService.addOnTimePickupPoints(appUser);
-        } else {
-            userService.deductLatePickupPoints(appUser);
-        }
-        return o;
-    }
+	public Order registerDeliveryPickup(int orderId) {
+		Order o = orderService.registerOrderPickup(orderId);
+		userService.assignPoints(
+			appUser,
+			orderService.isOnTimePickup(o) ? ORDER_PICKUP_ONTIME : ORDER_PICKUP_LATE);
+		return o;
+	}
 
-    public Order registerSuccesfullDelivery(int orderId) {
-        Order o = orderService.registerDelivery(orderId);
-        if (orderService.isOnTimePickup(o)) {
-            userService.addOnTimePickupPoints(appUser);
-        } else {
-            userService.deductLatePickupPoints(appUser);
-        }
-        return o;
-        //TODO: Complete use case deliver order event registerSuccesfullDelivery
-        //Makes a new orderEvent, DeliveryPoints added, sets Courier available
-    }
-
+	public Order registerSuccesfullDelivery(int orderId) {
+		Order o = orderService.registerDelivery(orderId);
+		userService.assignPoints(appUser,
+			orderService.isOnTimeDelivery(o) ? ORDER_PICKUP_ONTIME : ORDER_PICKUP_LATE);
+		return o;
+		//TODO: Complete use case deliver order event registerSuccesfullDelivery
+		//Makes a new orderEvent, DeliveryPoints added, sets Courier available
+	}
 
 
 }

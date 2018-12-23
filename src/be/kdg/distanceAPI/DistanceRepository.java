@@ -8,7 +8,7 @@ import org.locationtech.spatial4j.distance.DistanceUtils;
  * This class mocks an API class that connects to a webservice. At this moment the only functionality is calculating the distance between 2 points. that calculates the distance between two Points.
  * It depends on an external package.
  */
-public class DistanceCalculator {
+public class DistanceRepository {
 
 
     /**

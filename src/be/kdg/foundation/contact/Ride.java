@@ -14,7 +14,7 @@ public class Ride implements Move {
     private int minutesPerKm;
 
 
-    public Ride(be.kdg.foundation.contact.Position start, be.kdg.foundation.contact.Position dest, int minutesPerKm) {
+    public Ride(Position start, Position dest, int minutesPerKm) {
         this.start = start;
         this.dest = dest;
         this.minutesPerKm = minutesPerKm;
